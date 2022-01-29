@@ -11,7 +11,7 @@ const siteMetadata = {
   Happy reading!`,
   language: "en-us",
   theme: "system", // system, dark or light
-  siteUrl: "https://odin-next-phi.vercel.app/",
+  siteUrl: "https://odin-next-phi.vercel.app",
   siteRepo: "https://github.com/chaukhoa97/odin-next",
   siteLogo: "/static/images/logo.png",
   image: "/static/images/avatar.png",

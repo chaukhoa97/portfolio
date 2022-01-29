@@ -35,7 +35,7 @@ export default function Home({
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400 whitespace-pre-line">
             When I was first starting to learn programming, I used to note all
             my should-remember things in{" "}
-            <span className="text-blue-700 dark:text-blue-400">
+            <span className="text-blue-600 dark:text-blue-400">
               <a href="https://github.com/chaukhoa97/Storage">
                 one of my repositories
               </a>
