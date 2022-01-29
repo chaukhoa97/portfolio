@@ -2,9 +2,13 @@ const siteMetadata = {
   title: "Khoa Chau's digital home",
   author: "Khoa Chau",
   headerTitle: "",
-  description: `This is not quite a blog, but a space for me to store and implement my knowledge about the technologies I have learned.
-  Although the page is all of my stuff, I hope you will find something in your interest when spending time here.
-  Happy reading!🤘`,
+  description: `When I was first starting to learn programming, I used to note all my should-remember things in one of my repositories, sometimes in documents or anything that can be written on.
+
+  As my coding journey goes on they have started to become unmanageable and it messes up when I try to find something, so I come up with the idea "Why don't I keep them all in a hybrid portfolio-storage-blog personal page?", and here it is.
+
+  Although the page is almost things I write for myself, I hope you will find something in your interest when spending time here.
+  
+  Happy reading!`,
   language: "en-us",
   theme: "system", // system, dark or light
   siteUrl: "https://odin-next-phi.vercel.app/",

@@ -33,7 +33,26 @@ export default function Home({
             Welcome 👋
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400 whitespace-pre-line">
-            {siteMetadata.description}
+            When I was first starting to learn programming, I used to note all
+            my should-remember things in{" "}
+            <span className="text-blue-700 dark:text-blue-400">
+              <a href="https://github.com/chaukhoa97/Storage">
+                one of my repositories
+              </a>
+            </span>
+            , sometimes in documents or anything that can be written on.
+            <br />
+            <br />
+            As my coding journey goes on they have started to become
+            unmanageable and it messes up when I try to find something, so I
+            come up with the idea "Why don't I keep them all in a hybrid
+            portfolio-storage-blog personal page?", and here it is.
+            <br />
+            <br />
+            Although the page is almost things I write for myself, I hope you
+            will find something in your interest when spending time here.
+            <br />
+            Happy reading!
           </p>
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
