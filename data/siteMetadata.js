@@ -1,5 +1,5 @@
 const siteMetadata = {
-  title: "Khoa Chau's digital home",
+  title: "Khoa Chau's hybrid personal page",
   author: "Khoa Chau",
   headerTitle: "",
   description: `When I was first starting to learn programming, I used to note all my should-remember things in one of my repositories, sometimes in documents or anything that can be written on.
