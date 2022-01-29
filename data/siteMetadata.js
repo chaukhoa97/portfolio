@@ -1,22 +1,23 @@
 const siteMetadata = {
-  title: "A semi-blog",
-  author: "Khoa Châu",
-  headerTitle: "TailwindBlog",
-  description:
-    "This is actually not quite a blog, but a space for me to store and implement my knowledge about the technologies I have learned. Although the page is all of my stuff, I hope you will find something in your interest when spending time here.",
+  title: "Khoa Chau's digital home",
+  author: "Khoa Chau",
+  headerTitle: "",
+  description: `This is not quite a blog, but a space for me to store and implement my knowledge about the technologies I have learned.
+  Although the page is all of my stuff, I hope you will find something in your interest when spending time here.
+  Happy reading!🤘`,
   language: "en-us",
   theme: "system", // system, dark or light
-  siteUrl: "https://tailwind-nextjs-starter-blog.vercel.app",
-  siteRepo: "https://github.com/timlrx/tailwind-nextjs-starter-blog",
+  siteUrl: "https://odin-next-phi.vercel.app/",
+  siteRepo: "https://github.com/chaukhoa97/odin-next",
   siteLogo: "/static/images/logo.png",
   image: "/static/images/avatar.png",
-  socialBanner: "/static/images/twitter-card.png",
-  email: "address@yoursite.com",
-  github: "https://github.com",
-  twitter: "https://twitter.com/Twitter",
-  facebook: "https://facebook.com",
-  youtube: "https://youtube.com",
-  linkedin: "https://www.linkedin.com",
+  // socialBanner: '/static/images/twitter-card.png',
+  email: "cdkhoa97@gmail.com",
+  github: "https://github.com/chaukhoa97",
+  // twitter: 'https://twitter.com/Twitter',
+  facebook: "https://www.facebook.com/pride217",
+  // youtube: 'https://youtube.com',
+  // linkedin: 'https://www.linkedin.com',
   locale: "en-US",
   analytics: {
     // supports plausible, simpleAnalytics, umami or googleAnalytics

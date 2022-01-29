@@ -1,16 +1,12 @@
 ---
-name: Tails Azimuth
-avatar: /static/images/avatar.png
-occupation: Professor of Atmospheric Science
-company: Stanford University
-email: address@yoursite.com
-twitter: https://twitter.com/Twitter
-linkedin: https://www.linkedin.com
-github: https://github.com
+name: Khoa Chau (Finn)
+avatar: /static/images/avatar.jpg
+occupation: Reactjs Fresher Developer
+company: Part-time intern at Sun*
+email: cdkhoa97@gmail.com
+# twitter: https://twitter.com/Twitter
+# linkedin: https://www.linkedin.com
+github: https://github.com/chaukhoa97
 ---
 
-Tails Azimuth is a professor of atmospheric sciences at the Stanford AI Lab. His research interests includes complexity modelling of tailwinds, headwinds and crosswinds.
-
-He leads the clean energy group which develops 3D air pollution-climate models, writes differential equation solvers, and manufactures titanium plated air ballons. In his free time he bakes raspberry pi.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.
+I'm a Front-end developer with 1-year experience and a passion for modern website development. Currently focus on ReactJS and its ecosystem. Willing to continuous learning from more experienced developers and the community. Eager to deal with more demanding challenges and environment.
