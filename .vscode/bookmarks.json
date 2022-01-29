@@ -1,0 +1,14 @@
+{
+  "files": [
+    {
+      "path": "pages/posts/[id].tsx",
+      "bookmarks": [
+        {
+          "line": 35,
+          "column": 0,
+          "label": "getStaticPaths fallback"
+        }
+      ]
+    }
+  ]
+}

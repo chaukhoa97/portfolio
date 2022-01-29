@@ -1,83 +1,109 @@
-import Head from 'next/head';
-import Link from 'next/link';
+import Link from "@/components/Link";
+import { PageSEO } from "@/components/SEO";
+import Tag from "@/components/Tag";
+import siteMetadata from "@/data/siteMetadata";
+import { getAllFilesFrontMatter } from "@/lib/mdx";
+import formatDate from "@/lib/utils/formatDate";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
+import { PostFrontMatter } from "types/PostFrontMatter";
+import NewsletterForm from "@/components/NewsletterForm";
 
-export default function Home() {
+const MAX_DISPLAY = 5;
+
+export const getStaticProps: GetStaticProps<{
+  posts: PostFrontMatter[];
+}> = async () => {
+  const posts = await getAllFilesFrontMatter("blog");
+
+  return { props: { posts } };
+};
+
+export default function Home({
+  posts,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-4xl font-bold">
-          Welcome to{' '}
-          <Link href="../posts/first-post">
-            <a className="text-blue-600">Next.js!</a>
-          </Link>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.tsx
-          </code>
-        </p>
-
-        <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+    <>
+      <PageSEO
+        title={siteMetadata.title}
+        description={siteMetadata.description}
+      />
+      <div className="divide-y divide-gray-200 dark:divide-gray-700">
+        <div className="pt-6 pb-8 space-y-2 md:space-y-5">
+          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+            Latest
+          </h1>
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+            {siteMetadata.description}
+          </p>
         </div>
-      </main>
-
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
-      </footer>
-    </div>
+        <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+          {!posts.length && "No posts found."}
+          {posts.slice(0, MAX_DISPLAY).map((frontMatter) => {
+            const { slug, date, title, summary, tags } = frontMatter;
+            return (
+              <li key={slug} className="py-12">
+                <article>
+                  <div className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline">
+                    <dl>
+                      <dt className="sr-only">Published on</dt>
+                      <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                        <time dateTime={date}>{formatDate(date)}</time>
+                      </dd>
+                    </dl>
+                    <div className="space-y-5 xl:col-span-3">
+                      <div className="space-y-6">
+                        <div>
+                          <h2 className="text-2xl font-bold leading-8 tracking-tight">
+                            <Link
+                              href={`/blog/${slug}`}
+                              className="text-gray-900 dark:text-gray-100"
+                            >
+                              {title}
+                            </Link>
+                          </h2>
+                          <div className="flex flex-wrap">
+                            {tags.map((tag) => (
+                              <Tag key={tag} text={tag} />
+                            ))}
+                          </div>
+                        </div>
+                        <div className="prose text-gray-500 max-w-none dark:text-gray-400">
+                          {summary}
+                        </div>
+                      </div>
+                      <div className="text-base font-medium leading-6">
+                        <Link
+                          href={`/blog/${slug}`}
+                          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                          aria-label={`Read "${title}"`}
+                        >
+                          Read more &rarr;
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+      {posts.length > MAX_DISPLAY && (
+        <div className="flex justify-end text-base font-medium leading-6">
+          <Link
+            href="/blog"
+            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+            aria-label="all posts"
+          >
+            All Posts &rarr;
+          </Link>
+        </div>
+      )}
+      {siteMetadata.newsletter.provider !== "" && (
+        <div className="flex items-center justify-center pt-4">
+          <NewsletterForm />
+        </div>
+      )}
+    </>
   );
 }
