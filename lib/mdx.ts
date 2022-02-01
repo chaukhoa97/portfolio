@@ -8,6 +8,8 @@ import { PostFrontMatter } from "types/PostFrontMatter";
 import { AuthorFrontMatter } from "types/AuthorFrontMatter";
 import { Toc } from "types/Toc";
 // Remark packages
+import { remark } from "remark";
+import html from "remark-html";
 import remarkGfm from "remark-gfm";
 import remarkFootnotes from "remark-footnotes";
 import remarkMath from "remark-math";
@@ -21,7 +23,7 @@ import rehypeKatex from "rehype-katex";
 import rehypeCitation from "rehype-citation";
 import rehypePrismPlus from "rehype-prism-plus";
 
-const root = process.cwd();
+const root = process.cwd(); // '...\Repos\odin-next'
 
 export function getFiles(type: "blog" | "authors") {
   const prefixPaths = path.join(root, "data", type);
@@ -131,9 +133,7 @@ export async function getFileBySlug<T>(
 
 export async function getAllFilesFrontMatter(folder: "blog") {
   const prefixPaths = path.join(root, "data", folder);
-
   const files = getAllFilesRecursively(prefixPaths);
-
   const allFrontMatter: PostFrontMatter[] = [];
 
   files.forEach((file: string) => {
@@ -156,6 +156,81 @@ export async function getAllFilesFrontMatter(folder: "blog") {
       });
     }
   });
-
   return allFrontMatter.sort((a, b) => dateSortDesc(a.date, b.date));
+}
+
+//* Docs
+const docsDirectory = path.join(root, "data", "docs");
+export function getSortedDocsData() {
+  // Get file names under /posts
+  const fileNames = fs.readdirSync(docsDirectory);
+  const allDocsData = fileNames.map((fileName) => {
+    // Remove ".md" from file name to get id
+    const id = fileName.replace(/\.md$/, "");
+
+    // Read markdown file as string
+    const fullPath = path.join(docsDirectory, fileName);
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+
+    // Use gray-matter to parse the post metadata section
+    const matterResult = matter(fileContents);
+
+    // Combine the data with the id
+    return {
+      id,
+      ...(matterResult.data as { date: string; title: string }),
+    };
+  });
+  // Sort posts by date
+  return allDocsData.sort((a, b) => {
+    if (a.date < b.date) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
+}
+
+export function getAllDocIds() {
+  const fileNames = fs.readdirSync(docsDirectory);
+  // Returns an array that looks like this:
+  // [
+  //   {
+  //     params: {
+  //       id: 'ssg-ssr'
+  //     }
+  //   },
+  //   {
+  //     params: {
+  //       id: 'pre-rendering'
+  //     }
+  //   }
+  // ]
+  return fileNames.map((fileName) => {
+    return {
+      params: {
+        id: fileName.replace(/\.md$/, ""),
+      },
+    };
+  });
+}
+
+export async function getDocData(id) {
+  const fullPath = path.join(docsDirectory, `${id}.md`);
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+
+  // Use gray-matter to parse the post metadata section
+  const matterResult = matter(fileContents);
+  console.log(matterResult);
+  const processedContent = await remark()
+    .use(html)
+    .process(matterResult.content);
+  const contentHtml = processedContent.toString();
+
+  // Combine the data with the id
+  return {
+    id,
+    contentHtml,
+    ...matterResult.data,
+  };
 }
