@@ -1,11 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState } from 'react';
 
-import siteMetadata from "@/data/siteMetadata";
+import siteMetadata from '@/data/siteMetadata';
 
-const NewsletterForm = ({ title = "Subscribe to the newsletter" }) => {
+const NewsletterForm = ({ title = 'Subscribe to the newsletter' }) => {
   const inputEl = useRef<HTMLInputElement>(null);
   const [error, setError] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
   const subscribe = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -16,24 +16,24 @@ const NewsletterForm = ({ title = "Subscribe to the newsletter" }) => {
         email: inputEl.current.value,
       }),
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-      method: "POST",
+      method: 'POST',
     });
 
     const { error } = await res.json();
     if (error) {
       setError(true);
       setMessage(
-        "Your e-mail address is invalid or you are already subscribed!"
+        'Your e-mail address is invalid or you are already subscribed!'
       );
       return;
     }
 
-    inputEl.current.value = "";
+    inputEl.current.value = '';
     setError(false);
     setSubscribed(true);
-    setMessage("Successfully! 🎉 You are now subscribed.");
+    setMessage('Successfully! 🎉 You are now subscribed.');
   };
 
   return (
@@ -52,7 +52,7 @@ const NewsletterForm = ({ title = "Subscribe to the newsletter" }) => {
             id="email-input"
             name="email"
             placeholder={
-              subscribed ? "You're subscribed !  🎉" : "Enter your email"
+              subscribed ? "You're subscribed !  🎉" : 'Enter your email'
             }
             ref={inputEl}
             required
@@ -64,13 +64,13 @@ const NewsletterForm = ({ title = "Subscribe to the newsletter" }) => {
           <button
             className={`py-2 sm:py-0 w-full bg-primary-500 px-4 rounded-md font-medium text-white ${
               subscribed
-                ? "cursor-default"
-                : "hover:bg-primary-700 dark:hover:bg-primary-400"
+                ? 'cursor-default'
+                : 'hover:bg-primary-700 dark:hover:bg-primary-400'
             } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 dark:ring-offset-black`}
             type="submit"
             disabled={subscribed}
           >
-            {subscribed ? "Thank you!" : "Sign up"}
+            {subscribed ? 'Thank you!' : 'Sign up'}
           </button>
         </div>
       </form>

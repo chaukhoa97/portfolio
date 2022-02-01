@@ -1,15 +1,15 @@
-import Link from "@/components/Link";
-import { PageSEO } from "@/components/SEO";
-import Tag from "@/components/Tag";
-import siteMetadata from "@/data/siteMetadata";
-import { getAllTags } from "@/lib/tags";
-import kebabCase from "@/lib/utils/kebabCase";
-import { GetStaticProps, InferGetStaticPropsType } from "next";
+import Link from '@/components/Link';
+import { PageSEO } from '@/components/SEO';
+import Tag from '@/components/Tag';
+import siteMetadata from '@/data/siteMetadata';
+import { getAllTags } from '@/lib/tags';
+import kebabCase from '@/lib/utils/kebabCase';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 
 export const getStaticProps: GetStaticProps<{
   tags: Record<string, number>;
 }> = async () => {
-  const tags = await getAllTags("blog");
+  const tags = await getAllTags('blog');
 
   return { props: { tags } };
 };
@@ -31,7 +31,7 @@ export default function Tags({
           </h1>
         </div>
         <div className="flex flex-wrap max-w-lg">
-          {Object.keys(tags).length === 0 && "No tags found."}
+          {Object.keys(tags).length === 0 && 'No tags found.'}
           {sortedTags.map((t) => {
             return (
               <div key={t} className="mt-2 mb-2 mr-5">

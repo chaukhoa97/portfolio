@@ -1,7 +1,7 @@
-import ClientSideRendering from "../../components/next/ClientSideRendering";
-import IncrementalStaticGeneration from "../../components/next/IncrementalStaticGeneration";
-import ServerSideRendering from "../../components/next/ServerSideRendering";
-import StaticSiteGeneration from "../../components/next/StaticSiteGeneration";
+import ClientSideRendering from '../../components/next/ClientSideRendering';
+import IncrementalStaticGeneration from '../../components/next/IncrementalStaticGeneration';
+import ServerSideRendering from '../../components/next/ServerSideRendering';
+import StaticSiteGeneration from '../../components/next/StaticSiteGeneration';
 
 const renderChoice = () => {
   return (

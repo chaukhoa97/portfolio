@@ -1,19 +1,19 @@
-import Link from "@/components/Link";
-import { PageSEO } from "@/components/SEO";
-import Tag from "@/components/Tag";
-import siteMetadata from "@/data/siteMetadata";
-import { getAllFilesFrontMatter } from "@/lib/mdx";
-import formatDate from "@/lib/utils/formatDate";
-import { GetStaticProps, InferGetStaticPropsType } from "next";
-import { PostFrontMatter } from "types/PostFrontMatter";
-import NewsletterForm from "@/components/NewsletterForm";
+import Link from '@/components/Link';
+import { PageSEO } from '@/components/SEO';
+import Tag from '@/components/Tag';
+import siteMetadata from '@/data/siteMetadata';
+import { getAllFilesFrontMatter } from '@/lib/mdx';
+import formatDate from '@/lib/utils/formatDate';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { PostFrontMatter } from 'types/PostFrontMatter';
+import NewsletterForm from '@/components/NewsletterForm';
 
 const MAX_DISPLAY = 5;
 
 export const getStaticProps: GetStaticProps<{
   posts: PostFrontMatter[];
 }> = async () => {
-  const posts = await getAllFilesFrontMatter("blog");
+  const posts = await getAllFilesFrontMatter('blog');
 
   return { props: { posts } };
 };
@@ -30,33 +30,14 @@ export default function Home({
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="pt-6 pb-8 space-y-2 md:space-y-5">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            Welcome 👋
+            Latest
           </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400 whitespace-pre-line">
-            When I was first starting to learn programming, I used to note all
-            my should-remember things in{" "}
-            <span className="text-blue-600 dark:text-blue-400">
-              <a href="https://github.com/chaukhoa97/Storage">
-                one of my repositories
-              </a>
-            </span>
-            , sometimes in documents or anything that can be written on.
-            <br />
-            <br />
-            As my coding journey goes on they have started to become
-            unmanageable and it messes up when I try to find something, so I
-            come up with the idea "Why don't I keep them all in a hybrid
-            portfolio-storage-blog personal page?", and here it is.
-            <br />
-            <br />
-            Although the page is almost things I write for myself, I hope you
-            will find something in your interest when spending time here.
-            <br />
-            Happy reading!
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+            {siteMetadata.description}
           </p>
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-          {!posts.length && "No posts found."}
+          {!posts.length && 'No posts found.'}
           {posts.slice(0, MAX_DISPLAY).map((frontMatter) => {
             const { slug, date, title, summary, tags } = frontMatter;
             return (
@@ -118,7 +99,7 @@ export default function Home({
           </Link>
         </div>
       )}
-      {siteMetadata.newsletter.provider !== "" && (
+      {siteMetadata.newsletter.provider !== '' && (
         <div className="flex items-center justify-center pt-4">
           <NewsletterForm />
         </div>

@@ -1,5 +1,5 @@
-import DocLayout from "@/layouts/DocLayout";
-import { getSortedDocsData, getAllDocIds, getDocData } from "@/lib/mdx";
+import DocLayout from '@/layouts/DocLayout';
+import { getSortedDocsData, getAllDocIds, getDocData } from '@/lib/mdx';
 
 // export async function getStaticProps() {
 //   const allDocsData = getSortedDocsData();
