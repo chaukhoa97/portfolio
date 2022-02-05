@@ -1,16 +1,18 @@
-import "@/css/tailwind.css";
-import "@/css/prism.css";
+import '@/css/tailwind.css';
+import '@/css/prism.css';
 
-import { ThemeProvider } from "next-themes";
-import type { AppProps } from "next/app";
-import Head from "next/head";
+import '@fontsource/inter/variable-full.css';
 
-import siteMetadata from "@/data/siteMetadata";
-import Analytics from "@/components/analytics";
-import LayoutWrapper from "@/components/LayoutWrapper";
-import { ClientReload } from "@/components/ClientReload";
+import { ThemeProvider } from 'next-themes';
+import type { AppProps } from 'next/app';
+import Head from 'next/head';
 
-const isDevelopment = process.env.NODE_ENV === "development";
+import siteMetadata from '@/data/siteMetadata';
+import Analytics from '@/components/analytics';
+import LayoutWrapper from '@/components/LayoutWrapper';
+import { ClientReload } from '@/components/ClientReload';
+
+const isDevelopment = process.env.NODE_ENV === 'development';
 const isSocket = process.env.SOCKET;
 
 export default function App({ Component, pageProps }: AppProps) {

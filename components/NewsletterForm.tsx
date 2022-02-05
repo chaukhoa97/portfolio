@@ -1,11 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState } from 'react';
 
-import siteMetadata from "@/data/siteMetadata";
+import siteMetadata from '@/data/siteMetadata';
 
-const NewsletterForm = ({ title = "Subscribe to the newsletter" }) => {
+const NewsletterForm = ({ title = 'Subscribe to the newsletter' }) => {
   const inputEl = useRef<HTMLInputElement>(null);
   const [error, setError] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
   const subscribe = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -16,24 +16,24 @@ const NewsletterForm = ({ title = "Subscribe to the newsletter" }) => {
         email: inputEl.current.value,
       }),
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-      method: "POST",
+      method: 'POST',
     });
 
     const { error } = await res.json();
     if (error) {
       setError(true);
       setMessage(
-        "Your e-mail address is invalid or you are already subscribed!"
+        'Your e-mail address is invalid or you are already subscribed!'
       );
       return;
     }
 
-    inputEl.current.value = "";
+    inputEl.current.value = '';
     setError(false);
     setSubscribed(true);
-    setMessage("Successfully! 🎉 You are now subscribed.");
+    setMessage('Successfully! 🎉 You are now subscribed.');
   };
 
   return (
@@ -48,11 +48,11 @@ const NewsletterForm = ({ title = "Subscribe to the newsletter" }) => {
           </label>
           <input
             autoComplete="email"
-            className="px-4 rounded-md w-72 dark:bg-black focus:outline-none focus:ring-2 focus:border-transparent focus:ring-primary-600"
+            className="w-72 rounded-md px-4 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary-600 dark:bg-black"
             id="email-input"
             name="email"
             placeholder={
-              subscribed ? "You're subscribed !  🎉" : "Enter your email"
+              subscribed ? "You're subscribed !  🎉" : 'Enter your email'
             }
             ref={inputEl}
             required
@@ -60,22 +60,22 @@ const NewsletterForm = ({ title = "Subscribe to the newsletter" }) => {
             disabled={subscribed}
           />
         </div>
-        <div className="flex w-full mt-2 rounded-md shadow-sm sm:mt-0 sm:ml-3">
+        <div className="mt-2 flex w-full rounded-md shadow-sm sm:mt-0 sm:ml-3">
           <button
-            className={`py-2 sm:py-0 w-full bg-primary-500 px-4 rounded-md font-medium text-white ${
+            className={`w-full rounded-md bg-primary-500 py-2 px-4 font-medium text-white sm:py-0 ${
               subscribed
-                ? "cursor-default"
-                : "hover:bg-primary-700 dark:hover:bg-primary-400"
-            } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 dark:ring-offset-black`}
+                ? 'cursor-default'
+                : 'hover:bg-primary-700 dark:hover:bg-primary-400'
+            } focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 dark:ring-offset-black`}
             type="submit"
             disabled={subscribed}
           >
-            {subscribed ? "Thank you!" : "Sign up"}
+            {subscribed ? 'Thank you!' : 'Sign up'}
           </button>
         </div>
       </form>
       {error && (
-        <div className="pt-2 text-sm text-red-500 w-72 sm:w-96 dark:text-red-400">
+        <div className="w-72 pt-2 text-sm text-red-500 dark:text-red-400 sm:w-96">
           {message}
         </div>
       )}
@@ -87,7 +87,7 @@ export default NewsletterForm;
 
 export const BlogNewsletterForm = ({ title }) => (
   <div className="flex items-center justify-center">
-    <div className="p-6 bg-gray-100 dark:bg-gray-800 sm:px-14 sm:py-8">
+    <div className="bg-gray-100 p-6 dark:bg-gray-800 sm:px-14 sm:py-8">
       <NewsletterForm title={title} />
     </div>
   </div>

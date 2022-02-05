@@ -3,7 +3,7 @@ const DocNav = () => {
   // console.log(allPostsData);
   const allPostsData = [];
   return (
-    <div className="hidden lg:block w-72">
+    <div className="hidden w-72 lg:block">
       <ul>
         {allPostsData.map(({ id, date, title }) => (
           <li key={id}>

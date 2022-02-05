@@ -1,6 +1,6 @@
-import siteMetadata from "@/data/siteMetadata";
-import dynamic from "next/dynamic";
-import { PostFrontMatter } from "types/PostFrontMatter";
+import siteMetadata from '@/data/siteMetadata';
+import dynamic from 'next/dynamic';
+import { PostFrontMatter } from 'types/PostFrontMatter';
 
 interface Props {
   frontMatter: PostFrontMatter;
@@ -8,19 +8,19 @@ interface Props {
 
 const UtterancesComponent = dynamic(
   () => {
-    return import("@/components/comments/Utterances");
+    return import('@/components/comments/Utterances');
   },
   { ssr: false }
 );
 const GiscusComponent = dynamic(
   () => {
-    return import("@/components/comments/Giscus");
+    return import('@/components/comments/Giscus');
   },
   { ssr: false }
 );
 const DisqusComponent = dynamic(
   () => {
-    return import("@/components/comments/Disqus");
+    return import('@/components/comments/Disqus');
   },
   { ssr: false }
 );
@@ -31,26 +31,26 @@ const Comments = ({ frontMatter }: Props) => {
     siteMetadata.comment.giscusConfig.mapping ||
     siteMetadata.comment.utterancesConfig.issueTerm
   ) {
-    case "pathname":
+    case 'pathname':
       term = frontMatter.slug;
       break;
-    case "url":
+    case 'url':
       term = window.location.href;
       break;
-    case "title":
+    case 'title':
       term = frontMatter.title;
       break;
   }
   return (
     <div id="comment">
-      {siteMetadata.comment && siteMetadata.comment.provider === "giscus" && (
+      {siteMetadata.comment && siteMetadata.comment.provider === 'giscus' && (
         <GiscusComponent mapping={term} />
       )}
       {siteMetadata.comment &&
-        siteMetadata.comment.provider === "utterances" && (
+        siteMetadata.comment.provider === 'utterances' && (
           <UtterancesComponent issueTerm={term} />
         )}
-      {siteMetadata.comment && siteMetadata.comment.provider === "disqus" && (
+      {siteMetadata.comment && siteMetadata.comment.provider === 'disqus' && (
         <DisqusComponent frontMatter={frontMatter} />
       )}
     </div>

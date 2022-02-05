@@ -1,7 +1,7 @@
 ---
-title: "Breakpoints of popular Frameworks"
-date: "2022-01-01"
-tags: ["code"]
+title: 'Breakpoints of popular Frameworks'
+date: '2022-01-01'
+tags: ['code']
 draft: false
 summary: Breakpoints of popular Frameworks
 ---

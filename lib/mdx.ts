@@ -1,41 +1,41 @@
-import { bundleMDX } from "mdx-bundler";
-import fs from "fs";
-import matter from "gray-matter";
-import path from "path";
-import readingTime from "reading-time";
-import getAllFilesRecursively from "./utils/files";
-import { PostFrontMatter } from "types/PostFrontMatter";
-import { AuthorFrontMatter } from "types/AuthorFrontMatter";
-import { Toc } from "types/Toc";
+import { bundleMDX } from 'mdx-bundler';
+import fs from 'fs';
+import matter from 'gray-matter';
+import path from 'path';
+import readingTime from 'reading-time';
+import getAllFilesRecursively from './utils/files';
+import { PostFrontMatter } from 'types/PostFrontMatter';
+import { AuthorFrontMatter } from 'types/AuthorFrontMatter';
+import { Toc } from 'types/Toc';
 // Remark packages
-import { remark } from "remark";
-import html from "remark-html";
-import remarkGfm from "remark-gfm";
-import remarkFootnotes from "remark-footnotes";
-import remarkMath from "remark-math";
-import remarkCodeTitles from "./remark-code-title";
-import remarkTocHeadings from "./remark-toc-headings";
-import remarkImgToJsx from "./remark-img-to-jsx";
+import remarkGfm from 'remark-gfm';
+import remarkFootnotes from 'remark-footnotes';
+import remarkMath from 'remark-math';
+import remarkExtractFrontmatter from './remark-extract-frontmatter';
+import remarkCodeTitles from './remark-code-title';
+import remarkTocHeadings from './remark-toc-headings';
+import remarkImgToJsx from './remark-img-to-jsx';
 // Rehype packages
-import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypeKatex from "rehype-katex";
-import rehypeCitation from "rehype-citation";
-import rehypePrismPlus from "rehype-prism-plus";
+import rehypeSlug from 'rehype-slug';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeKatex from 'rehype-katex';
+import rehypeCitation from 'rehype-citation';
+import rehypePrismPlus from 'rehype-prism-plus';
+import rehypePresetMinify from 'rehype-preset-minify';
 
-const root = process.cwd(); // '...\Repos\odin-next'
+const root = process.cwd();
 
-export function getFiles(type: "blog" | "authors") {
-  const prefixPaths = path.join(root, "data", type);
+export function getFiles(type: 'blog' | 'authors') {
+  const prefixPaths = path.join(root, 'data', type);
   const files = getAllFilesRecursively(prefixPaths);
   // Only want to return blog/path and ignore root, replace is needed to work on Windows
   return files.map((file) =>
-    file.slice(prefixPaths.length + 1).replace(/\\/g, "/")
+    file.slice(prefixPaths.length + 1).replace(/\\/g, '/')
   );
 }
 
 export function formatSlug(slug: string) {
-  return slug.replace(/\.(mdx|md)/, "");
+  return slug.replace(/\.(mdx|md)/, '');
 }
 
 export function dateSortDesc(a: string, b: string) {
@@ -44,31 +44,31 @@ export function dateSortDesc(a: string, b: string) {
   return 0;
 }
 
-export async function getFileBySlug<T>(
-  type: "authors" | "blog",
+export async function getFileBySlug(
+  type: 'authors' | 'blog' | 'docs',
   slug: string | string[]
 ) {
-  const mdxPath = path.join(root, "data", type, `${slug}.mdx`);
-  const mdPath = path.join(root, "data", type, `${slug}.md`);
+  const mdxPath = path.join(root, 'data', type, `${slug}.mdx`);
+  const mdPath = path.join(root, 'data', type, `${slug}.md`);
   const source = fs.existsSync(mdxPath)
-    ? fs.readFileSync(mdxPath, "utf8")
-    : fs.readFileSync(mdPath, "utf8");
+    ? fs.readFileSync(mdxPath, 'utf8')
+    : fs.readFileSync(mdPath, 'utf8');
 
   // https://github.com/kentcdodds/mdx-bundler#nextjs-esbuild-enoent
-  if (process.platform === "win32") {
+  if (process.platform === 'win32') {
     process.env.ESBUILD_BINARY_PATH = path.join(
       root,
-      "node_modules",
-      "esbuild",
-      "esbuild.exe"
+      'node_modules',
+      'esbuild',
+      'esbuild.exe'
     );
   } else {
     process.env.ESBUILD_BINARY_PATH = path.join(
       root,
-      "node_modules",
-      "esbuild",
-      "bin",
-      "esbuild"
+      'node_modules',
+      'esbuild',
+      'bin',
+      'esbuild'
     );
   }
 
@@ -79,13 +79,14 @@ export async function getFileBySlug<T>(
   const { code } = await bundleMDX({
     source,
     // mdx imports can be automatically source from the components directory
-    cwd: path.join(root, "components"),
+    cwd: path.join(root, 'components'),
     xdmOptions(options) {
       // this is the recommended way to add custom remark/rehype plugins:
       // The syntax might look weird, but it protects you in case we add/remove
       // plugins in the future.
       options.remarkPlugins = [
         ...(options.remarkPlugins ?? []),
+        remarkExtractFrontmatter,
         [remarkTocHeadings, { exportRef: toc }],
         remarkGfm,
         remarkCodeTitles,
@@ -98,21 +99,16 @@ export async function getFileBySlug<T>(
         rehypeSlug,
         rehypeAutolinkHeadings,
         rehypeKatex,
-        [
-          rehypeCitation,
-          {
-            bibliography: frontmatter?.bibliography,
-            path: path.join(root, "data"),
-          },
-        ],
+        [rehypeCitation, { path: path.join(root, 'data') }],
         [rehypePrismPlus, { ignoreMissing: true }],
+        rehypePresetMinify,
       ];
       return options;
     },
     esbuildOptions: (options) => {
       options.loader = {
         ...options.loader,
-        ".js": "jsx",
+        '.js': 'jsx',
       };
       return options;
     },
@@ -131,22 +127,24 @@ export async function getFileBySlug<T>(
   };
 }
 
-export async function getAllFilesFrontMatter(folder: "blog") {
-  const prefixPaths = path.join(root, "data", folder);
+export async function getAllFilesFrontMatter(folder: 'blog') {
+  const prefixPaths = path.join(root, 'data', folder);
+
   const files = getAllFilesRecursively(prefixPaths);
+
   const allFrontMatter: PostFrontMatter[] = [];
 
   files.forEach((file: string) => {
     // Replace is needed to work on Windows
-    const fileName = file.slice(prefixPaths.length + 1).replace(/\\/g, "/");
+    const fileName = file.slice(prefixPaths.length + 1).replace(/\\/g, '/');
     // Remove Unexpected File
-    if (path.extname(fileName) !== ".md" && path.extname(fileName) !== ".mdx") {
+    if (path.extname(fileName) !== '.md' && path.extname(fileName) !== '.mdx') {
       return;
     }
-    const source = fs.readFileSync(file, "utf8");
+    const source = fs.readFileSync(file, 'utf8');
     const matterFile = matter(source);
     const frontmatter = matterFile.data as AuthorFrontMatter | PostFrontMatter;
-    if ("draft" in frontmatter && frontmatter.draft !== true) {
+    if ('draft' in frontmatter && frontmatter.draft !== true) {
       allFrontMatter.push({
         ...frontmatter,
         slug: formatSlug(fileName),
@@ -156,81 +154,6 @@ export async function getAllFilesFrontMatter(folder: "blog") {
       });
     }
   });
+
   return allFrontMatter.sort((a, b) => dateSortDesc(a.date, b.date));
-}
-
-//* Docs
-const docsDirectory = path.join(root, "data", "docs");
-export function getSortedDocsData() {
-  // Get file names under /posts
-  const fileNames = fs.readdirSync(docsDirectory);
-  const allDocsData = fileNames.map((fileName) => {
-    // Remove ".md" from file name to get id
-    const id = fileName.replace(/\.md$/, "");
-
-    // Read markdown file as string
-    const fullPath = path.join(docsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-
-    // Use gray-matter to parse the post metadata section
-    const matterResult = matter(fileContents);
-
-    // Combine the data with the id
-    return {
-      id,
-      ...(matterResult.data as { date: string; title: string }),
-    };
-  });
-  // Sort posts by date
-  return allDocsData.sort((a, b) => {
-    if (a.date < b.date) {
-      return 1;
-    } else {
-      return -1;
-    }
-  });
-}
-
-export function getAllDocIds() {
-  const fileNames = fs.readdirSync(docsDirectory);
-  // Returns an array that looks like this:
-  // [
-  //   {
-  //     params: {
-  //       id: 'ssg-ssr'
-  //     }
-  //   },
-  //   {
-  //     params: {
-  //       id: 'pre-rendering'
-  //     }
-  //   }
-  // ]
-  return fileNames.map((fileName) => {
-    return {
-      params: {
-        id: fileName.replace(/\.md$/, ""),
-      },
-    };
-  });
-}
-
-export async function getDocData(id) {
-  const fullPath = path.join(docsDirectory, `${id}.md`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
-
-  // Use gray-matter to parse the post metadata section
-  const matterResult = matter(fileContents);
-  console.log(matterResult);
-  const processedContent = await remark()
-    .use(html)
-    .process(matterResult.content);
-  const contentHtml = processedContent.toString();
-
-  // Combine the data with the id
-  return {
-    id,
-    contentHtml,
-    ...matterResult.data,
-  };
 }
