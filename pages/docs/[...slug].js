@@ -9,7 +9,7 @@ import {
   getFiles,
 } from '@/lib/mdx';
 
-const DEFAULT_LAYOUT = 'PostLayout';
+const DEFAULT_LAYOUT = 'DocLayout';
 
 export async function getStaticPaths() {
   const posts = getFiles('docs');
