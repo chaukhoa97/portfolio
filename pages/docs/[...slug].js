@@ -8,6 +8,8 @@ import {
   getFileBySlug,
   getFiles,
 } from '@/lib/mdx';
+import Link from 'next/link';
+import ReactDOM from 'react-dom';
 
 const DEFAULT_LAYOUT = 'DocLayout';
 
@@ -24,34 +26,71 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const allPosts = await getAllFilesFrontMatter('docs');
-  const postIndex = allPosts.findIndex(
+  const allDocs = await getAllFilesFrontMatter('docs');
+  // console.log(allDocs);
+  const allDocCategories = {};
+  for (const post of allDocs) {
+    if (!allDocCategories[post.category]) {
+      allDocCategories[post.category] = [];
+    }
+    allDocCategories[post.category].push({
+      title: post.title,
+      slug: post.slug,
+    });
+  }
+  // console.log(allDocCategories);
+
+  const postIndex = allDocs.findIndex(
     (post) => formatSlug(post.slug) === params.slug.join('/')
   );
-  const prev = allPosts[postIndex + 1] || null;
-  const next = allPosts[postIndex - 1] || null;
+  const prev = allDocs[postIndex + 1] || null;
+  const next = allDocs[postIndex - 1] || null;
   const post = await getFileBySlug('docs', params.slug.join('/'));
+  // console.log(post);
   const authorList = post.frontMatter.authors || ['default'];
   const authorPromise = authorList.map(async (author) => {
     const authorResults = await getFileBySlug('authors', [author]);
     return authorResults.frontMatter;
   });
   const authorDetails = await Promise.all(authorPromise);
-
+  // console.log(post.frontMatter);
   // rss
-  if (allPosts.length > 0) {
-    const rss = generateRss(allPosts);
+  if (allDocs.length > 0) {
+    const rss = generateRss(allDocs);
     fs.writeFileSync('./public/feed.xml', rss);
   }
 
-  return { props: { post, authorDetails, prev, next } };
+  return { props: { post, authorDetails, prev, next, allDocCategories } };
 }
 
-export default function Blog({ post, authorDetails, prev, next }) {
+export default function Blog({
+  post,
+  authorDetails,
+  prev,
+  next,
+  allDocCategories,
+}) {
   const { mdxSource, toc, frontMatter } = post;
+  console.log(allDocCategories);
+
+  const docNav = Object.keys(allDocCategories).map((category) => (
+    <div key={category} className="xl:w-80">
+      <h2>{category}</h2>
+      <ul>
+        {allDocCategories[category].map((doc) => (
+          <li key={doc.slug}>
+            <Link href={`/docs/${doc.slug}`}>
+              <a>{doc.title}</a>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ));
 
   return (
     <>
+      {docNav}
       {frontMatter.draft !== true ? (
         <MDXLayoutRenderer
           layout={frontMatter.layout || DEFAULT_LAYOUT}

@@ -47,7 +47,7 @@ export default function DocLayout({
             className="divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:flex"
             style={{ gridTemplateRows: 'auto 1fr' }}
           >
-            <div className="xl:w-80">Navbar</div>
+            {/* <div className="xl:w-80">Navbar</div> */}
             <div className="flex-auto divide-y divide-gray-200 dark:divide-gray-700 xl:pb-0">
               <div className="prose max-w-none pt-10 pb-8 dark:prose-dark">
                 <PageTitle>{title}</PageTitle>

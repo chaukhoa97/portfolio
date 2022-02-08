@@ -1,6 +1,7 @@
 ---
 title: 'Type vs Interface'
-date: '2022-01-02'
+category: 'Typescript'
+draft: false
 ---
 
 | Aspect                                          | Type | Interface |

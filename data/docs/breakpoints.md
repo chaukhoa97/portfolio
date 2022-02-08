@@ -1,9 +1,7 @@
 ---
 title: 'Breakpoints of popular Frameworks'
-date: '2022-01-01'
-tags: ['code']
+category: 'Frameworks'
 draft: false
-summary: Breakpoints of popular Frameworks
 ---
 
 |  Breakpoints  | xs  | sm  | md  | lg   | xl   | xxl       |
