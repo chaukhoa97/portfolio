@@ -66,15 +66,15 @@ module.exports = withBundleAnalyzer({
       },
     ];
   },
-  // async redirects() {
-  //   return [
-  //     {
-  //       source: '/docs',
-  //       destination: '/docs/react-notes',
-  //       permanent: false,
-  //     },
-  //   ];
-  // },
+  async redirects() {
+    return [
+      {
+        source: '/docs',
+        destination: '/docs/react-notes',
+        permanent: false,
+      },
+    ];
+  },
   webpack: (config, { dev, isServer }) => {
     config.module.rules.push({
       test: /\.(png|jpe?g|gif|mp4)$/i,
