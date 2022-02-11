@@ -69,7 +69,7 @@ module.exports = withBundleAnalyzer({
   async redirects() {
     return [
       {
-        source: '/docs',
+        source: '/poasjdpoasjdopajsodpjasd',
         destination: '/docs/react-notes',
         permanent: false,
       },
