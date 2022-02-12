@@ -5,11 +5,16 @@ draft: false
 ---
 
 - Pass callback vào onClick
-  ```js
+  ```jsx
   let a = <button onClick={() => dispatch('+')}>+</button>;
   ```
 - Module CSS
-  ```js
+  ```jsx
   import styles from '../nav.module.scss';
   <h1 className={`${styles['active-nav']} ${styles.red}`}>Hello</h1>;
+  ```
+- useState dựa theo previous state
+  ```jsx
+  const [count, setCount] = useState(0);
+  <button onClick={() => setCount(count + 1)}>{count}</button>;
   ```

@@ -4,6 +4,9 @@ category: 'React'
 draft: false
 ---
 
+![](https://i.imgur.com/Wtx9WvJ.png)
+![](https://i.imgur.com/UFZ1opQ.png)
+
 1. Component lấy dữ liệu từ Store để thể hiện trên UI (View)
 2. Người dùng tương tác lên UI (Ex: onClick button ….)
 3. Component đóng vai trò là Action Creator, tạo ra action obj bằng cách tự declare 1 action object (slice2 line 40) hoặc bằng THUNK: 1 async fn that returns the action object (slice2 line 18)

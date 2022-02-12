@@ -1,15 +1,17 @@
-import fs from 'fs';
+import { MDXLayoutRenderer } from '@/components/MDXComponents';
 import PageTitle from '@/components/PageTitle';
 import generateRss from '@/lib/generate-rss';
-import { MDXLayoutRenderer } from '@/components/MDXComponents';
 import {
   formatSlug,
   getAllFilesFrontMatter,
   getFileBySlug,
   getFiles,
 } from '@/lib/mdx';
+import fs from 'fs';
 import Link from 'next/link';
-import ReactDOM from 'react-dom';
+import React from 'react';
+import { useState, useEffect } from 'react';
+import { ChevronRightIcon, ChevronDownIcon } from '@heroicons/react/outline';
 
 const DEFAULT_LAYOUT = 'DocLayout';
 
@@ -27,7 +29,6 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const allDocs = await getAllFilesFrontMatter('docs');
-  // console.log(allDocs);
   const allDocCategories = {};
   for (const post of allDocs) {
     if (!allDocCategories[post.category]) {
@@ -38,7 +39,6 @@ export async function getStaticProps({ params }) {
       slug: post.slug,
     });
   }
-  // console.log(allDocCategories);
 
   const postIndex = allDocs.findIndex(
     (post) => formatSlug(post.slug) === params.slug.join('/')
@@ -46,14 +46,12 @@ export async function getStaticProps({ params }) {
   const prev = allDocs[postIndex + 1] || null;
   const next = allDocs[postIndex - 1] || null;
   const post = await getFileBySlug('docs', params.slug.join('/'));
-  // console.log(post);
   const authorList = post.frontMatter.authors || ['default'];
   const authorPromise = authorList.map(async (author) => {
     const authorResults = await getFileBySlug('authors', [author]);
     return authorResults.frontMatter;
   });
   const authorDetails = await Promise.all(authorPromise);
-  // console.log(post.frontMatter);
   // rss
   if (allDocs.length > 0) {
     const rss = generateRss(allDocs);
@@ -63,7 +61,16 @@ export async function getStaticProps({ params }) {
   return { props: { post, authorDetails, prev, next, allDocCategories } };
 }
 
-export default function Blog({
+const docCategoriesOrder = [
+  'React',
+  'JavaScript',
+  'Typescript',
+  'Nextjs',
+  'HTML',
+  'CSS',
+  'undefined',
+];
+export default function Doc({
   post,
   authorDetails,
   prev,
@@ -71,16 +78,42 @@ export default function Blog({
   allDocCategories,
 }) {
   const { mdxSource, toc, frontMatter } = post;
-  console.log(allDocCategories);
+  const docCategories = Object.keys(allDocCategories);
 
-  const docNav = Object.keys(allDocCategories).map((category) => (
-    <div key={category} className="xl:w-80">
-      <h2>{category}</h2>
-      <ul>
+  docCategoriesOrder.forEach((category) => {
+    docCategories.push(
+      docCategories.splice(docCategories.indexOf(category), 1)[0]
+    );
+    console.log(docCategories);
+  });
+  const [showNav, setShowNav] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(0);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setWindowWidth(window.innerWidth);
+    }
+  }, []);
+  const handleShowNav = () => {
+    if (windowWidth < 1280) {
+      setShowNav((prevState) => !prevState);
+    }
+  };
+
+  const docNav = docCategories.map((category) => (
+    <div key={category} className="mb-8">
+      <h2 className="mb-2 text-lg font-semibold">
+        {category !== 'undefined' ? category : 'ETC'}
+      </h2>
+      <ul className="space-y-2 border-l border-gray-300 dark:border-gray-600">
         {allDocCategories[category].map((doc) => (
           <li key={doc.slug}>
             <Link href={`/docs/${doc.slug}`}>
-              <a>{doc.title}</a>
+              <a
+                className="-ml-px block border-l border-transparent pl-4 text-gray-500 hover:border-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:border-gray-300 dark:hover:text-gray-300"
+                onClick={handleShowNav}
+              >
+                {doc.title}
+              </a>
             </Link>
           </li>
         ))}
@@ -90,27 +123,53 @@ export default function Blog({
 
   return (
     <>
-      {docNav}
-      {frontMatter.draft !== true ? (
-        <MDXLayoutRenderer
-          layout={frontMatter.layout || DEFAULT_LAYOUT}
-          toc={toc}
-          mdxSource={mdxSource}
-          frontMatter={frontMatter}
-          authorDetails={authorDetails}
-          prev={prev}
-          next={next}
-        />
-      ) : (
-        <div className="mt-24 text-center">
-          <PageTitle>
-            Under Construction{' '}
-            <span role="img" aria-label="roadwork sign">
-              🚧
-            </span>
-          </PageTitle>
+      {windowWidth < 1280 && (
+        <div
+          onClick={handleShowNav}
+          className="mb-3 flex cursor-pointer items-center"
+        >
+          {showNav ? (
+            <ChevronDownIcon className="mr-1 h-4 w-4" />
+          ) : (
+            <ChevronRightIcon className="mr-1 h-4 w-4" />
+          )}
+          Menu
         </div>
       )}
+      <hr className="border-gray-200 dark:border-gray-700" />
+      <div className="relative xl:flex">
+        {(showNav || windowWidth >= 1280) && (
+          <div className="absolute z-10 w-full overflow-hidden bg-white pb-8 pt-6 dark:bg-gray-900 xl:relative xl:w-80 xl:pt-12">
+            {docNav}
+          </div>
+        )}
+        {frontMatter.draft !== true ? (
+          <div
+            className={`prose max-w-none flex-auto pt-10 pb-8 prose-a:!no-underline dark:prose-dark xl:max-w-[52rem] ${
+              showNav && 'hidden'
+            }`}
+          >
+            <MDXLayoutRenderer
+              layout={frontMatter.layout || DEFAULT_LAYOUT}
+              toc={toc}
+              mdxSource={mdxSource}
+              frontMatter={frontMatter}
+              authorDetails={authorDetails}
+              prev={prev}
+              next={next}
+            />
+          </div>
+        ) : (
+          <div className="mt-4 max-w-none flex-auto text-center xl:max-w-[52rem]">
+            <PageTitle>
+              Under Construction{' '}
+              <span role="img" aria-label="roadwork sign">
+                🚧
+              </span>
+            </PageTitle>
+          </div>
+        )}
+      </div>
     </>
   );
 }

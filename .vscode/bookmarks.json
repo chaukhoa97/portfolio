@@ -9,6 +9,16 @@
           "label": "getStaticPaths fallback"
         }
       ]
+    },
+    {
+      "path": "components/Pagination.js",
+      "bookmarks": [
+        {
+          "line": 21,
+          "column": 80,
+          "label": "font"
+        }
+      ]
     }
   ]
 }

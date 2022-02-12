@@ -1,6 +1,5 @@
 ---
-title: 'Breakpoints of popular Frameworks'
-category: 'Frameworks'
+title: 'Breakpoints of Popular Libraries'
 draft: false
 ---
 
