@@ -1,8 +1,8 @@
 import Image from './Image';
 import Link from './Link';
 
-const Card = ({ title, description, imgSrc, href }) => (
-  <div className="md p-4 md:w-1/2" style={{ maxWidth: '544px' }}>
+const Card = ({ title, description, imgSrc, href, emphasize }) => (
+  <div className="md p-4 lg:w-1/2" style={{ maxWidth: '544px' }}>
     <div
       className={`${
         imgSrc && 'h-full'
@@ -40,6 +40,9 @@ const Card = ({ title, description, imgSrc, href }) => (
         </h2>
         <p className="prose mb-3 max-w-none whitespace-pre-wrap text-gray-500 dark:text-gray-400">
           {description}
+        </p>
+        <p className="prose mb-3 max-w-none whitespace-pre-wrap text-lg font-bold text-gray-500 dark:text-gray-400">
+          {emphasize}
         </p>
         {href && (
           <Link

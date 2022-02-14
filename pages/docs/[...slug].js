@@ -100,7 +100,7 @@ export default function Doc({
   };
 
   const docNav = docCategories.map((category) => (
-    <div key={category} className="mb-8">
+    <div key={category} className="mb-8 ">
       <h2 className="mb-2 text-lg font-semibold">
         {category !== 'undefined' ? category : 'ETC'}
       </h2>
@@ -109,7 +109,7 @@ export default function Doc({
           <li key={doc.slug}>
             <Link href={`/docs/${doc.slug}`}>
               <a
-                className="-ml-px block border-l border-transparent pl-4 text-gray-500 hover:border-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:border-gray-300 dark:hover:text-gray-300"
+                className="-ml-px border-l border-transparent pl-4 text-gray-500 hover:border-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:border-gray-300 dark:hover:text-gray-300"
                 onClick={handleShowNav}
               >
                 {doc.title}
@@ -139,7 +139,7 @@ export default function Doc({
       <hr className="border-gray-200 dark:border-gray-700" />
       <div className="relative xl:flex">
         {(showNav || windowWidth >= 1280) && (
-          <div className="absolute z-10 w-full overflow-hidden bg-white pb-8 pt-6 dark:bg-gray-900 xl:relative xl:w-80 xl:pt-12">
+          <div className="z-10 w-full overflow-hidden bg-transparent pt-6 xl:relative xl:w-80 xl:pt-12">
             {docNav}
           </div>
         )}

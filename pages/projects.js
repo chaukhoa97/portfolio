@@ -26,6 +26,7 @@ export default function Projects() {
                 key={d.title}
                 title={d.title}
                 description={d.description}
+                emphasize={d.emphasize}
                 imgSrc={d.imgSrc}
                 href={d.href}
               />
