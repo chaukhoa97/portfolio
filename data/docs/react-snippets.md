@@ -25,3 +25,12 @@ draft: false
   ncu -u
   npm i
   ```
+
+- nvm:
+  ```shell
+  nvm i 10.24.1
+  nvm use 10.24.1
+  nvm list
+  nvm use newest
+  node -v
+  ```
