@@ -64,7 +64,7 @@ export default function Home() {
               or even some League of Legends matches.
             </p>
             <div className="not-prose flex gap-x-4">
-              <Link href="https://drive.google.com/file/d/1Sk7-lG-tht-XjXt4OqbJ3Isnjp_Ak1p2/view?usp=sharing">
+              <Link href="https://drive.google.com/file/d/1ZeiB9qYwy646XMRAgE06kfwcEj2Ehng_/view?usp=sharing">
                 <a className=" inline-block rounded-lg bg-primary-500 px-4 py-2  !text-white !no-underline shadow-md transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-lg focus:bg-primary-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-lg">
                   My CV
                 </a>
