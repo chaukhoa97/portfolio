@@ -10,7 +10,7 @@ export default function SectionContainer({ children }) {
   if (!mounted) return null;
   return (
     <div
-      className={`t mx-auto max-w-5xl px-4 sm:px-6 xl:max-w-full xl:px-0 ${
+      className={`mx-auto max-w-full px-4 sm:px-6 lg:px-8 ${
         theme === 'dark' || resolvedTheme === 'dark'
           ? 'bg-hero-dark'
           : 'bg-hero-light'

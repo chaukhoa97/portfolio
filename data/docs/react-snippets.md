@@ -18,19 +18,12 @@ draft: false
   const [count, setCount] = useState(0);
   <button onClick={() => setCount(count + 1)}>{count}</button>;
   ```
-- Update all package:
-
-  ```shell
-  npm i -g npm-check-updates
-  ncu -u
-  npm i
-  ```
-
-- nvm:
-  ```shell
-  nvm i 10.24.1
-  nvm use 10.24.1
-  nvm list
-  nvm use newest
-  node -v
+- Lazy init: `expenseviveFn` chỉ chạy ở lần render đầu tiên để tạo ra giá trị init của state
+  ```jsx
+  const expensiveFn = () => {
+    console.log(100);
+    return 100;
+  };
+  // Hoặc useState(() => expensiveFn()); KHÔNG PHẢI useState(expenseiveFn())
+  const [lazy, setLazy] = useState(expensiveFn);
   ```

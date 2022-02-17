@@ -84,7 +84,6 @@ export default function Doc({
     docCategories.push(
       docCategories.splice(docCategories.indexOf(category), 1)[0]
     );
-    console.log(docCategories);
   });
   const [showNav, setShowNav] = useState(false);
   const [windowWidth, setWindowWidth] = useState(0);
@@ -94,7 +93,7 @@ export default function Doc({
     }
   }, []);
   const handleShowNav = () => {
-    if (windowWidth < 1280) {
+    if (windowWidth < 1024) {
       setShowNav((prevState) => !prevState);
     }
   };
@@ -123,7 +122,7 @@ export default function Doc({
 
   return (
     <>
-      {windowWidth < 1280 && (
+      {windowWidth < 1024 && (
         <div
           onClick={handleShowNav}
           className="mb-3 flex cursor-pointer items-center"
@@ -137,15 +136,15 @@ export default function Doc({
         </div>
       )}
       <hr className="border-gray-200 dark:border-gray-700" />
-      <div className="relative xl:flex">
-        {(showNav || windowWidth >= 1280) && (
-          <div className="z-10 w-full overflow-hidden bg-transparent pt-6 xl:relative xl:w-80 xl:pt-12">
+      <div className="relative lg:flex">
+        {(showNav || windowWidth >= 1024) && (
+          <div className="z-10 w-full overflow-hidden bg-transparent pt-6 lg:w-64 lg:pt-12 xl:relative">
             {docNav}
           </div>
         )}
         {frontMatter.draft !== true ? (
           <div
-            className={`prose max-w-none flex-auto pt-10 pb-8 prose-a:!no-underline dark:prose-dark xl:max-w-[52rem] ${
+            className={`prose max-w-none flex-auto pt-10 pb-8 prose-a:!no-underline dark:prose-dark lg:max-w-[44rem] xl:max-w-[57rem] ${
               showNav && 'hidden'
             }`}
           >

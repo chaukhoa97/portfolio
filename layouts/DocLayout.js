@@ -33,7 +33,7 @@ export default function DocLayout({
   const { slug, fileName, date, title, tags } = frontMatter;
 
   return (
-    <SectionContainer>
+    <>
       <BlogSEO
         url={`${siteMetadata.siteUrl}/docs/${slug}`}
         authorDetails={authorDetails}
@@ -79,6 +79,6 @@ export default function DocLayout({
           </Link>
         </div>
       </article>
-    </SectionContainer>
+    </>
   );
 }

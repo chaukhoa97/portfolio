@@ -7,5 +7,5 @@ draft: false
 ```ts
 as ... : ... Assertion
 &: Intersection
-extends: Intersection || Conditional Types(Left assignable to Right? A : B) || Generics
+extends: Intersection || Conditional Types(Left assignable to Right? A : B) || Generic Constraint
 ```

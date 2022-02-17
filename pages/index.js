@@ -65,7 +65,10 @@ export default function Home() {
             </p>
             <div className="not-prose flex gap-x-4">
               <Link href="https://drive.google.com/file/d/1ZeiB9qYwy646XMRAgE06kfwcEj2Ehng_/view?usp=sharing">
-                <a className=" inline-block rounded-lg bg-primary-500 px-4 py-2  !text-white !no-underline shadow-md transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-lg focus:bg-primary-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-lg">
+                <a
+                  className=" inline-block rounded-lg bg-primary-500 px-4 py-2  !text-white !no-underline shadow-md transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-lg focus:bg-primary-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-lg"
+                  target={'_blank'}
+                >
                   My CV
                 </a>
               </Link>
@@ -108,6 +111,8 @@ export default function Home() {
                   <a
                     href="https://github.com/chaukhoa97/Storage"
                     className="!no-underline"
+                    target={'_blank'}
+                    rel="noreferrer"
                   >
                     one of my repositories
                   </a>
@@ -141,13 +146,20 @@ export default function Home() {
               <Disclosure.Panel className="mb-4 px-4 pt-4 pb-2 text-gray-900 dark:text-gray-200">
                 This site is built with Nextjs, Tailwindcss, and deployed with
                 Vercel. It is based on{' '}
-                <a className="!no-underline" href="https://twitter.com/timlrxx">
+                <a
+                  className="!no-underline"
+                  href="https://twitter.com/timlrxx"
+                  target={'_blank'}
+                  rel="noreferrer"
+                >
                   Timothy Lin
                 </a>
                 's blog starter (you can find it{' '}
                 <a
                   className="!no-underline"
                   href="https://github.com/timlrx/tailwind-nextjs-starter-blog"
+                  target={'_blank'}
+                  rel="noreferrer"
                 >
                   here
                 </a>

@@ -1,5 +1,5 @@
 ---
-title: 'Breakpoints of Popular Libraries'
+title: 'Libraries Breakpoint'
 draft: false
 ---
 

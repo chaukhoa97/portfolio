@@ -1,5 +1,5 @@
 ---
-title: 'Data Structures & Algorithms'
+title: 'DS & Algorithms'
 draft: false
 ---
 
