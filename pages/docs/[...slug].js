@@ -138,14 +138,14 @@ export default function Doc({
       <hr className="border-gray-200 dark:border-gray-700" />
       <div className="relative lg:flex">
         {(showNav || windowWidth >= 1024) && (
-          <div className="z-10 w-full overflow-hidden bg-transparent pt-6 lg:w-64 lg:pt-12 xl:relative">
+          <div className="z-10 w-full bg-transparent pt-6 lg:static lg:w-64 lg:min-w-[16rem] lg:pt-12">
             {docNav}
           </div>
         )}
         {frontMatter.draft !== true ? (
           <div
-            className={`prose max-w-none flex-auto pt-10 pb-8 prose-a:!no-underline dark:prose-dark lg:max-w-[44rem] xl:max-w-[57rem] ${
-              showNav && 'hidden'
+            className={`prose max-w-none flex-1 overflow-hidden pt-10 pb-8 prose-a:!no-underline dark:prose-dark ${
+              showNav ? 'hidden' : ''
             }`}
           >
             <MDXLayoutRenderer

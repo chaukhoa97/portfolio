@@ -42,7 +42,7 @@ export default function DocLayout({
       <ScrollTopAndComment />
       <article>
         <PageTitle>{title}</PageTitle>
-        {children}
+        <div className="mx-auto">{children}</div>
         <hr className="mb-6 border-gray-200 dark:border-gray-700" />
         <div className="text-gray-700 dark:text-gray-300">
           {(next || prev) && (

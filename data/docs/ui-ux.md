@@ -13,6 +13,8 @@ draft: false
 
 ### Typical parts of a website:
 
+- **Accordion/Disclosure/Collapse**: Click đóng/mở nội dung như FAQ.
+
 ![](https://imgur.com/MyJJ16E.png)
 
 ### Photoshop:
