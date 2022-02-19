@@ -4,21 +4,21 @@ category: 'React'
 draft: false
 ---
 
-- Pass callback vào `onClick`
+- **Pass callback vào `onClick`**
   ```jsx
   let a = <button onClick={() => dispatch('+')}>+</button>;
   ```
-- Module CSS
+- **Module CSS**
   ```jsx
   import styles from '../nav.module.scss';
   <h1 className={`${styles['active-nav']} ${styles.red}`}>Hello</h1>;
   ```
-- `useState` dựa theo previous state
+- **`useState` dựa theo previous state**
   ```jsx
   const [count, setCount] = useState(0);
   <button onClick={() => setCount(count + 1)}>{count}</button>;
   ```
-- Lazy init: `expenseviveFn` chỉ chạy ở lần render đầu tiên để tạo ra giá trị init của state
+- **Lazy init**: `expenseviveFn` chỉ chạy ở lần render đầu tiên để tạo ra giá trị init của state
 
   ```jsx
   const expensiveFn = () => {
@@ -29,7 +29,7 @@ draft: false
   const [lazy, setLazy] = useState(expensiveFn);
   ```
 
-- Portal:
+- **Portal**:
 
   ```jsx
   import { createPortal } from 'react-dom';

@@ -30,10 +30,12 @@ const Parent = ({ expensiveFn }) => {
 export default React.memo(Parent);
 ```
 
-### useState vs useRef
+### useState vs useRef vs let-const
 
-`useRef(initValue)`: `amountRef` value sẽ dc preserve khi Component re-render (giống useState). Nhưng khi amountRef thay đổi, nó ko khiến Component bị re-render (khác useState)  
-Vì vậy, value show ra trên UI thì dùng `useState`. Còn những thứ khác như form người dùng nhập vào thì dùng `useRef` sẽ đỡ bị re-render hơn. Những thứ constant thì dùng `JS variable` như bình thường.
+- `useRef(initValue)`: `amountRef` value sẽ dc preserve khi Component re-render (giống useState). Nhưng khi amountRef thay đổi, nó ko khiến Component bị re-render (khác useState).
+- `useState` vs `let`: Cả 2 đều thay đổi variables in memory, nhưng show giá trị đó ra UI thì `let` không show đúng current value dc.
+
+Vì vậy, value show ra trên UI thì dùng `useState`. Còn những thứ khác như form người dùng nhập vào thì dùng `useRef` sẽ đỡ bị re-render hơn. Những thứ constant ko show thì dùng `JS variable` như bình thường.
 
 ### Controlled vs Uncontrolled Component with useRef
 

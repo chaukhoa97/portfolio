@@ -2,7 +2,7 @@ import { PageSEO } from '@/components/SEO';
 import siteMetadata from '@/data/siteMetadata';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Disclosure } from '@headlessui/react';
+import { Disclosure, Transition } from '@headlessui/react';
 import { ChevronUpIcon } from '@heroicons/react/outline';
 
 export default function Home() {
@@ -104,27 +104,36 @@ export default function Home() {
                   } h-5 w-5 text-gray-900`}
                 />
               </Disclosure.Button>
-              <Disclosure.Panel className="mb-4 px-4 pt-4 pb-5 text-gray-900 dark:text-gray-200">
-                When I was first starting to learn programming, I used to note
-                all my should-remember things in{' '}
-                <span>
-                  <a
-                    href="https://github.com/chaukhoa97/Storage"
-                    className="!no-underline"
-                    target={'_blank'}
-                    rel="noreferrer"
-                  >
-                    one of my repositories
-                  </a>
-                </span>
-                , sometimes in documents or anything that can be written on.
-                <br />
-                As my coding journey goes on they have started to become
-                unmanageable and it messes up when I try to find something. So I
-                come up with an idea - "Why don't I keep those all on a personal
-                page?". And here it is, a place for me to store and implement
-                the technologies I have perceived on my career path.
-              </Disclosure.Panel>
+              <Transition
+                enter="transition duration-100 ease-out"
+                enterFrom="transform scale-95 opacity-0"
+                enterTo="transform scale-100 opacity-100"
+                leave="transition duration-75 ease-out"
+                leaveFrom="transform scale-100 opacity-100"
+                leaveTo="transform scale-95 opacity-0"
+              >
+                <Disclosure.Panel className="mb-4 px-4 pt-4 pb-5 text-gray-900 dark:text-gray-200">
+                  When I was first starting to learn programming, I used to note
+                  all my should-remember things in{' '}
+                  <span>
+                    <a
+                      href="https://github.com/chaukhoa97/Storage"
+                      className="!no-underline"
+                      target={'_blank'}
+                      rel="noreferrer"
+                    >
+                      one of my repositories
+                    </a>
+                  </span>
+                  , sometimes in documents or anything that can be written on.
+                  <br />
+                  As my coding journey goes on they have started to become
+                  unmanageable and it messes up when I try to find something. So
+                  I come up with an idea - "Why don't I keep those all on a
+                  personal page?". And here it is, a place for me to store and
+                  implement the technologies I have perceived on my career path.
+                </Disclosure.Panel>
+              </Transition>
             </>
           )}
         </Disclosure>
@@ -143,29 +152,38 @@ export default function Home() {
                   } h-5 w-5 text-gray-900`}
                 />
               </Disclosure.Button>
-              <Disclosure.Panel className="mb-4 px-4 pt-4 pb-2 text-gray-900 dark:text-gray-200">
-                This site is built with Nextjs, Tailwindcss, and deployed with
-                Vercel. It is based on{' '}
-                <a
-                  className="!no-underline"
-                  href="https://twitter.com/timlrxx"
-                  target={'_blank'}
-                  rel="noreferrer"
-                >
-                  Timothy Lin
-                </a>
-                's blog starter (you can find it{' '}
-                <a
-                  className="!no-underline"
-                  href="https://github.com/timlrx/tailwind-nextjs-starter-blog"
-                  target={'_blank'}
-                  rel="noreferrer"
-                >
-                  here
-                </a>
-                ). Since the site is not a blog itself so I have heavily
-                customized it to match my usage.
-              </Disclosure.Panel>
+              <Transition
+                enter="transition duration-100 ease-out"
+                enterFrom="transform scale-95 opacity-0"
+                enterTo="transform scale-100 opacity-100"
+                leave="transition duration-75 ease-out"
+                leaveFrom="transform scale-100 opacity-100"
+                leaveTo="transform scale-95 opacity-0"
+              >
+                <Disclosure.Panel className="mb-4 px-4 pt-4 pb-2 text-gray-900 dark:text-gray-200">
+                  This site is built with Nextjs, Tailwindcss, and deployed with
+                  Vercel. It is based on{' '}
+                  <a
+                    className="!no-underline"
+                    href="https://twitter.com/timlrxx"
+                    target={'_blank'}
+                    rel="noreferrer"
+                  >
+                    Timothy Lin
+                  </a>
+                  's blog starter (you can find it{' '}
+                  <a
+                    className="!no-underline"
+                    href="https://github.com/timlrx/tailwind-nextjs-starter-blog"
+                    target={'_blank'}
+                    rel="noreferrer"
+                  >
+                    here
+                  </a>
+                  ). Since the site is not a blog itself so I have heavily
+                  customized it to match my usage.
+                </Disclosure.Panel>
+              </Transition>
             </>
           )}
         </Disclosure>

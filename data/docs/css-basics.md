@@ -6,19 +6,24 @@ draft: false
 
 ### Flexbox: Main(`justify-content`)/Cross(`align-items`) Axis
 
-- `flex-grow` - `MAX`: Chỉ định tỷ lệ kích thước to nhất mà phần tử nên có so với các phần tử còn lại.
-  - `Default 0`: Kích thước của các phần tử sẽ khớp với nội dung bên trong -> có thể ko lắp đầy hết `Parent`.
-  - `> 1`: Ví dụ có 2 phần tử: Child1: `grow: 1`, Child2: `grow: 3` -> Cả 2 sẽ lấp đầy `Parent` nhưng Child2 sẽ chiếm nhiều hơn.
-- `flex-shrink` - `MIN`: Kích thước nhỏ nhất mà phần tử nên có. Giá trị càng lớn thì phần tử càng nhỏ.
-  - `Default 1`: Take up the same amount of space at all times.
-  - `0`: Bất chấp giữ nguyên kích thước, dẫu có phá vỡ layout.
-- `flex-basis` - `IDEAL`: Kích thước lý tưởng của phần tử.
-  - `Default auto`: Dc tính toán theo nội dung và cá phần tử khác.
-  - `1000px`: Trình duyệt sẽ hiểu là "Hãy cố gắng dành ra `1000px` cho phần tử này". Cái này còn phụ thuộc vào nội dung của những phần tử khác - Nếu nội dung mấy phần tử khác mà to quá thì cũng chịu.
+1. `flex-grow` - `MAX`: Chỉ định tỷ lệ kích thước to nhất mà phần tử nên có so với các phần tử còn lại.
+
+   - `Default 0`: Kích thước của các phần tử sẽ khớp với nội dung bên trong -> có thể ko lắp đầy hết `Parent`.
+   - `> 1`: Ví dụ có 2 phần tử: Child1: `grow: 1`, Child2: `grow: 3` -> Cả 2 sẽ lấp đầy `Parent` nhưng Child2 sẽ chiếm nhiều hơn.
+
+2. `flex-shrink` - `MIN`: Kích thước nhỏ nhất mà phần tử nên có. Giá trị càng lớn thì phần tử càng nhỏ.
+
+   - `Default 1`: Take up the same amount of space at all times.
+   - `0`: Bất chấp giữ nguyên kích thước, dẫu có phá vỡ layout.
+
+3. `flex-basis` - `IDEAL`: Kích thước lý tưởng của phần tử.
+
+   - `Default auto`: Dc tính toán theo nội dung và cá phần tử khác.
+   - `1000px`: Trình duyệt sẽ hiểu là "Hãy cố gắng dành ra `1000px` cho phần tử này". Cái này còn phụ thuộc vào nội dung của những phần tử khác - Nếu nội dung mấy phần tử khác mà to quá thì cũng chịu.
 
 ### Box model: [Content + (Padding + Border)] + Margin
 
-- `box-sizing: border-box` : Width/Height = `Content` + `Padding` + `Border
+- `box-sizing: border-box` : Width/Height = `Content` + `Padding` + `Border`.
 - `box-sizing: content-box` : Width/Height = `Content` -> `Padding` & `Border` làm width to hơn so với ý muốn.
 
 ### Display: `flex`, `grid`, `none` ...
@@ -41,9 +46,9 @@ draft: false
   - `button:active`: Select the button when it is clicked.
 - **Pseudo-element::** Style specified parts of an element:
 
-  - ```css
-    ::before { content: '', color:... }
-    ```
+  ```css
+  p::before { content: '', color:... }
+  ```
 
 - **Unit**: px vw vh rem em %
 - ```css
