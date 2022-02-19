@@ -19,6 +19,7 @@ draft: false
   <button onClick={() => setCount(count + 1)}>{count}</button>;
   ```
 - Lazy init: `expenseviveFn` chỉ chạy ở lần render đầu tiên để tạo ra giá trị init của state
+
   ```jsx
   const expensiveFn = () => {
     console.log(100);
@@ -26,4 +27,20 @@ draft: false
   };
   // Hoặc useState(() => expensiveFn()); KHÔNG PHẢI useState(expenseiveFn())
   const [lazy, setLazy] = useState(expensiveFn);
+  ```
+
+- Portal:
+
+  ```jsx
+  import { createPortal } from 'react-dom';
+  const MyComponent = () => {
+    return (
+      <div>
+        {createPortal(
+          <h2>This h2 will be brought to #portal</h2>,
+          document.querySelector('#portal') // nơi render trong index.html
+        )}
+      </div>
+    );
+  };
   ```

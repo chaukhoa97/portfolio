@@ -30,11 +30,56 @@ const Parent = ({ expensiveFn }) => {
 export default React.memo(Parent);
 ```
 
+### useState vs useRef
+
+`useRef(initValue)`: `amountRef` value sẽ dc preserve khi Component re-render (giống useState). Nhưng khi amountRef thay đổi, nó ko khiến Component bị re-render (khác useState)  
+Vì vậy, value show ra trên UI thì dùng `useState`. Còn những thứ khác như form người dùng nhập vào thì dùng `useRef` sẽ đỡ bị re-render hơn. Những thứ constant thì dùng `JS variable` như bình thường.
+
+### Controlled vs Uncontrolled Component with useRef
+
+```jsx:Controlled.jsx
+// State của <input> do React quản lý
+// Gõ phím -> titleState update -> Value của <input> update theo
+<input value={titleState} onChange={(e)=>setTitleState(e.target.value)} />
+```
+
+```jsx:Uncontrolled.jsx
+// State của input là internal state, mình chỉ lấy value về bằng ref...
+const titleRef = useRef();
+// ...titleRef.current bây h chính là <input> -> Có thể gọi hàm ví dụ như titleRef.current.focus()
+<input ref={titleRef} type='text' />
+```
+
+### Custom Hook
+
+Được dùng cho những fn có Hook (Hook chỉ dc ở trong Function component/Custom hook) khi cần reuse nhiều chỗ, hoặc cho những component có logic na ná nhau (như một fn bình thường nhưng giờ có thêm Hook)
+
+```jsx:useCounter.jsx
+// Custom hook must start with "use"
+function useCounter(isForward = true) {
+  const [num, setNum] = useState(0);
+  useEffect(() => {
+    if (isForward) {
+      setInterval(() => setNum((n) => n + 1), 3000);
+    } else {
+      setInterval(() => setNum((n) => n - 1), 3000);
+    }
+  }, [isForward]);
+  return num;
+}
+```
+
+```jsx:HookUser.jsx
+import useCounter from './useCounter.jsx';
+function Forward() {
+  const result = useCounter(false);
+  return <h3>{result}</h3>;
+}
+```
+
 ### Usage
 
 - **Manage Narrow State**: `useState` / `useReducer`(Complex State)
 - **Manage Wide State**: `useContext` / Redux
 - **Optimize**: `useMemo` / `useCallback` / `React.memo`
-
 - **Side effect**: `useEffect`
-- **Similar component logic**: Custom hook

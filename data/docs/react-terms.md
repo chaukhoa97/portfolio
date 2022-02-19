@@ -13,3 +13,8 @@ draft: false
   const C1 = ({ name, children }) => <div id={name}>{children}</div>;
   const C2 = (props) => <div id={props.name}>{props.children}</div>;
   ```
+
+- **Fragment**: `<Fragment key = ...>` - thêm key vào dc so với chỉ dùng `<>`
+- **Reason why component doesnt update when its props change:**
+  1. The props weren't updated correctly via setState (WRONG: props.title ='a') (RIGHT: setTitle('a') )
+  2. The reference to the prop stayed the same
