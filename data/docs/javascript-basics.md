@@ -57,23 +57,49 @@ console.log(deep[0] === obj[0]); // => false
 |  Let  |      Block      | ✔️(must be initialized) |     ❌     |   ❌   |
 | Const |      Block      |   ✔️(not initialized)   |     ❌     |   ✔️   |
 
-- Const: Đối với dữ liệu kiểu primitive thì không thể cập nhật giá trị mới. Còn đối với kiểu reference thì mặc dù không thể cập nhật giá trị mới, nhưng ta vẫn có thể cập nhật giá trị cho thuộc tính (property) của biến.
+- **const property update**:
+
+```js:Ok.js
+const obj = {};
+obj.foo = "bar"; // {foo : 'bar'}
+obj.foo = "bar2"; // {foo : 'bar2'}
+
+const ar = [];
+ar.push("foo"); // ['foo']
+ar.pop(); // []
+```
+
+```js:Error.js
+const text = "a";
+text = "b"; // error - re-assigning
+const text = "c"; // error - re-declaring
+
+obj = { key1: "foo" }; // error - re-assigning
+const obj = { key1: "foo" }; // error - re-declaring
+```
 
 #### Types
 
-- Primitive:
+- **Primitive**:
 
   - string; number (NaN - Not a Number vẫn đc tính là number, Infinity, -Infinity); boolean; undefined;
   - null (typeof null === “object”) // Mặc dù behavior giống primitive nhưng lại là object
   - Ít dùng: symbol; bigint
 
-- Reference:
+- **Reference**:
   - object; array (typeof Object/Array === “object”)
   - function (typeof Function === “function")
   - Ít dùng: date; regexp; error;
 
 #### ETC
 
+- **Axios vs Fetch**: Fetch phải tốn thêm 1 promise (.json()), ngoài ra trong các lệnh như POST,PATCH,... phải convert data bằng JSON.stringify. Axios có thể trực tiếp handle error còn Fetch thì phải check response.ok
+- **Optional Chaning**: `?.` - nếu ko có, dừng lại và trả về undefined
+- **Falsy values**: 0, “”, false, null, undefined, NaN
+- **Nullish coalescing**: `??`
+  - `Truthy && expr` -> expr
+  - `Falsy || expr` -> expr
+  - `null/undefined` ?? expr -> expr
 - `==` - chỉ so value -> null == undefined vs `===` - so luôn cả type
 - ![](https://imgur.com/SsK9doN.png)
 - [Sự khác biệt map và weakmap](https://kieblog.vn/javascript-su-khac-biet-map-va-weakmap/)

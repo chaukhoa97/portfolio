@@ -1,7 +1,14 @@
 ---
 title: 'UI/UX Stuff'
+category: 'Archive'
 draft: false
 ---
+
+### Typical parts of a website:
+
+- **Accordion/Disclosure/Collapse**: Click đóng/mở nội dung như FAQ.
+
+![](https://imgur.com/MyJJ16E.png)
 
 ### Header-Content Font pairs:
 
@@ -10,12 +17,6 @@ draft: false
 - **Playful**: Amatic SC - Josefin Sans
 - **Serious**: Playfair Display - Fauna one
 - **Impact**: Alfa Slab - Open Sans
-
-### Typical parts of a website:
-
-- **Accordion/Disclosure/Collapse**: Click đóng/mở nội dung như FAQ.
-
-![](https://imgur.com/MyJJ16E.png)
 
 ### Photoshop:
 

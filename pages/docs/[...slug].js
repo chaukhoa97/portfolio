@@ -69,6 +69,7 @@ const docCategoriesOrder = [
   'HTML',
   'CSS',
   'undefined',
+  'Archive',
 ];
 export default function Doc({
   post,
@@ -99,7 +100,7 @@ export default function Doc({
   };
 
   const docNav = docCategories.map((category) => (
-    <div key={category} className="mb-8 ">
+    <div key={category} className="mb-8">
       <h2 className="mb-2 text-lg font-semibold">
         {category !== 'undefined' ? category : 'ETC'}
       </h2>
@@ -138,13 +139,13 @@ export default function Doc({
       <hr className="border-gray-200 dark:border-gray-700" />
       <div className="relative lg:flex">
         {(showNav || windowWidth >= 1024) && (
-          <div className="z-10 w-full bg-transparent pt-6 lg:static lg:w-64 lg:min-w-[16rem] lg:pt-12">
+          <div className="top-20 z-10 w-full bg-transparent pt-6 lg:sticky lg:max-h-[calc(100vh-146.65px)] lg:w-max lg:min-w-[16rem] lg:overflow-y-scroll lg:pr-4 lg:pt-8">
             {docNav}
           </div>
         )}
         {frontMatter.draft !== true ? (
           <div
-            className={`prose max-w-none flex-1 overflow-hidden pt-10 pb-8 prose-a:!no-underline dark:prose-dark ${
+            className={`prose max-w-none flex-1 overflow-hidden pt-10 pb-8 prose-a:!no-underline dark:prose-dark lg:pl-8 ${
               showNav ? 'hidden' : ''
             }`}
           >

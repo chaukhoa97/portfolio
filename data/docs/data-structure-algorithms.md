@@ -1,5 +1,6 @@
 ---
 title: 'DS & Algorithms'
+category: 'Archive'
 draft: false
 ---
 
