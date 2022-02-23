@@ -1,7 +1,7 @@
 const projectsData = [
   {
     title: 'E-commerce Website',
-    description: `A 2-week built-from-scratch e-commerce website with a simple design.
+    description: `One person project in 2 weeks, built-from-scratch e-commerce website with a compact design.
     - UI: React & Ant Design, with a little SCSS.
     - State management: Redux with Redux Toolkit.
     - Database: Firebase's Realtime Database.

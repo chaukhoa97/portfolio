@@ -12,8 +12,7 @@ draft: false
     <meta charset="UTF-8" />
   Viewport for responsive web design
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  Allows control over where resources are loaded from.
-  Place as early as possible,
+  Allows control over where resources are loaded from. Place as early as possible,
   as the tag only applies to resources that are declared after it.
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   Control the behavior of search engine crawling and indexing

@@ -8,17 +8,17 @@ draft: false
 
 1. `flex-grow` - `MAX`: Chỉ định tỷ lệ kích thước to nhất mà phần tử nên có so với các phần tử còn lại.
 
-   - `Default 0`: Kích thước của các phần tử sẽ khớp với nội dung bên trong -> có thể ko lắp đầy hết `Parent`.
+   - **(Default)** `0`: Kích thước của các phần tử sẽ khớp với nội dung bên trong -> có thể ko lắp đầy hết `Parent`.
    - `> 1`: Ví dụ có 2 phần tử: Child1: `grow: 1`, Child2: `grow: 3` -> Cả 2 sẽ lấp đầy `Parent` nhưng Child2 sẽ chiếm nhiều hơn.
 
 2. `flex-shrink` - `MIN`: Kích thước nhỏ nhất mà phần tử nên có. Giá trị càng lớn thì phần tử càng nhỏ.
 
-   - `Default 1`: Take up the same amount of space at all times.
+   - **(Default)** `1`: Take up the same amount of space at all times.
    - `0`: Bất chấp giữ nguyên kích thước, dẫu có phá vỡ layout.
 
 3. `flex-basis` - `IDEAL`: Kích thước lý tưởng của phần tử.
 
-   - `Default auto`: Dc tính toán theo nội dung và cá phần tử khác.
+   - **(Default)** `auto`: Dc tính toán theo nội dung và cá phần tử khác.
    - `1000px`: Trình duyệt sẽ hiểu là "Hãy cố gắng dành ra `1000px` cho phần tử này". Cái này còn phụ thuộc vào nội dung của những phần tử khác - Nếu nội dung mấy phần tử khác mà to quá thì cũng chịu.
 
 ### Box model: [Content + (Padding + Border)] + Margin
@@ -35,7 +35,7 @@ draft: false
 
 ### Position: `fixed`, `sticky`(`relative` + `fixed`), `static`
 
-- `absolute`: If a child element has `absolute` then the parent element will behave as if the child isn’t there at all. Để children absolutely position theo parent thì parent phải có position là `relative` hoặc `absolute`.
+- `absolute`: If a child element has `absolute` then the parent element will xem như child ko có ở đó luôn. Để children absolutely position theo parent thì parent phải có position là `relative` hoặc `absolute`.
 - `relative`: Ở chỗ cũ như `static`, nhưng khác với `static` là bây giờ `left/right/top/bottom/z-index` sẽ hoạt động.
 
 ### ETC

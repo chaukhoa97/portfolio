@@ -6,6 +6,7 @@ draft: false
 
 ### Optimize
 
+- `useCallback(fn, deps)` = `useMemo(() => fn, deps)`
 - `React.memo(component)`: Chỉ re-render component dc wrap bởi `React.memo` khi props của component thay đổi.
 - `useCallback`: Khi Component re-evaluate, function trong useCallback sẽ ko re-create lại.
 - `useMemo` (**ÍT DÙNG HƠN** `useCallback`): Chỉ dùng khi function này quá phức tạp (ex: Sort, fetch,...) mà value có dependency mới thay đổi.
@@ -22,15 +23,15 @@ export default GrandParent;
 
 ```jsx:Parent.jsx
 const Parent = ({ expensiveFn }) => {
-  const unStoredResult = expensiveFn(); // Create lại mỗi lần Parent re-render
-  const storedResult = useMemo(expensiveFn, []); // Chỉ create lại khi dependency thay đổi
-  return <Child a={expensiveFnResult} />;
+  const unstoredValue = expensiveFn(); // Create lại mỗi lần Parent re-render
+  const storedValue = useMemo(() => expensiveFn, []); // Create lại theo Dependency
+  return <Child a={unStoredValue} />; // Nếu unstoredValue thay đổi/là ref value, thì Child sẽ re-render
 };
 //3. prop ko đổi + React.memo -> Parent sẽ ko re-render khi GrandParent re-render
 export default React.memo(Parent);
 ```
 
-### useState vs useRef vs let-const
+### useRef vs useState vs let-const
 
 - `useRef(initValue)`: `amountRef` value sẽ dc preserve khi Component re-render (giống useState). Nhưng khi amountRef thay đổi, nó ko khiến Component bị re-render (khác useState).
 - `useState` vs `let`: Cả 2 đều thay đổi variables in memory, nhưng show giá trị đó ra UI thì `let` không show đúng current value dc.
@@ -54,34 +55,31 @@ const titleRef = useRef();
 
 ### Custom Hook
 
-Được dùng cho những fn có Hook (Hook chỉ dc ở trong Function component/Custom hook) khi cần reuse nhiều chỗ, hoặc cho những component có logic na ná nhau (như một fn bình thường nhưng giờ có thêm Hook)
+Handle business logic ở CustomHook rồi truyền vào UI(dumb) Component
 
-```jsx:useCounter.jsx
+```jsx:useCounterUseCase.jsx
 // Custom hook must start with "use"
-function useCounter(isForward = true) {
-  const [num, setNum] = useState(0);
-  useEffect(() => {
-    if (isForward) {
-      setInterval(() => setNum((n) => n + 1), 3000);
-    } else {
-      setInterval(() => setNum((n) => n - 1), 3000);
-    }
-  }, [isForward]);
-  return num;
+function useCounterUseCase(isForward = true) {
+  const [state, setState] = useState({
+    count: 0,
+    isForward: true,
+  });
+  return state;
 }
 ```
 
-```jsx:HookUser.jsx
-import useCounter from './useCounter.jsx';
-function Forward() {
-  const result = useCounter(false);
-  return <h3>{result}</h3>;
+```jsx:Container.jsx
+import useCounterUseCase from './useCounterUseCase.jsx';
+function Container() {
+  const {count, isForward} = useCounterUseCase(false);
+  return isForward ? <div>{count + 1}</div> : <div>{count - 1}</div>;
 }
 ```
 
 ### Usage
 
-- **Manage Narrow State**: `useState` / `useReducer`(Complex State)
-- **Manage Wide State**: `useContext` / Redux
-- **Optimize**: `useMemo` / `useCallback` / `React.memo`
-- **Side effect**: `useEffect`
+- `useRef`: Truy cập, tương tác với DOM, thường là input để khi gõ không bị re-render lại.
+- `useState` / `useReducer`(Complex State): Manage Narrow State.
+- `useContext` / Redux: Manage Wide State.
+- `useMemo` / `useCallback` / `React.memo`: Optimize.
+- `useEffect`: Side effect.
