@@ -4,21 +4,14 @@ category: 'JavaScript'
 draft: false
 ---
 
-#### `Hoisting`: Là quá trình đưa các khai báo hàm (function declaration) và khai báo biến lên trên đầu trang, nó được thực hiện tự động bởi JavaScript Engine.
+### Advanced
 
-```js
-add(3, 4); //* returns 7
-// Function declaretion -> hoisting lên đầu
-function add(num1, num2) {
-  return num1 + num2;
-}
+#### Callback: _Hàm_ dc truyền qua _argument_: Gọi hàm khi có sự kiện xảy ra, thực hiện bất đồng bộ.
 
-//* Function expression -> ko hoisting
-subtract(7, 4); //! Uncaught TypeError: subtract is not a function
-var subtract = function (num1, num2) {
-  return num1 - num2;
-};
-```
+#### Event loop
+
+Các hàm async vào `Call stack` thì dc di chuyển qua `Web api`. Ở `Web api` chạy async xong thì push callback vào `Task queue`.  
+**Event Loop**: Khi `Call stack` trống thì `Task queue` đưa event vào `Call stack` theo kiểu **FIFO**.
 
 #### `Closure` bao gồm: Function và References tới các biến ở outer scope của function đó (Lexical Environment). Trong JS, closures của 1 function dc tạo ra ở thời điểm declare function đó.
 
@@ -34,9 +27,28 @@ function f1() {
   };
 }
 const f3 = f1(); // execute f1() returns f2 -> những biến ở outer scope của f2 sẽ dc giữ lại.
-f3(); //1 2
-f3(); //1 4
+f3(); // 2
+f3(); // 4
 console.log(x); // ReferenceError: Biến x chỉ dc sử dụng trong f1
+```
+
+#### `Hoisting`: Là quá trình đưa các khai báo (declaration) hàm/biến lên trên đầu trang, nó được thực hiện tự động bởi JavaScript Engine.
+
+```js
+add(3, 4); //* returns 7
+// Function declaretion -> hoisting lên đầu
+function add(num1, num2) {
+  return num1 + num2;
+}
+
+//* Function expression -> ko hoisting
+subtract(7, 4); //! Uncaught TypeError: subtract is not a function
+var subtract = function (num1, num2) {
+  return num1 - num2;
+};
+var x; // console.log(x) -> undefined
+let y; // console.log(y) -> ERROR
+const z; // ERROR ngay bước init
 ```
 
 #### Shallow Copy vs Deep Copy:
@@ -93,7 +105,6 @@ const obj = { key1: "foo" }; // error - re-declaring
 
 #### ETC
 
-- **Axios vs Fetch**: Fetch phải tốn thêm 1 promise (.json()), ngoài ra trong các lệnh như POST,PATCH,... phải convert data bằng JSON.stringify. Axios có thể trực tiếp handle error còn Fetch thì phải check response.ok
 - **Optional Chaning**: `?.` - nếu ko có, dừng lại và trả về undefined
 - **Falsy values**: 0, “”, false, null, undefined, NaN
 - **Nullish coalescing**: `??`

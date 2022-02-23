@@ -35,7 +35,7 @@ draft: false
 
 ### Position: `fixed`, `sticky`(`relative` + `fixed`), `static`
 
-- `absolute`: If a child element has `absolute` then the parent element will behave as if the child isn’t there at all. Để children absolutely position theo parent thì parent phải có position là `relative` hoặc `absolute`.
+- `absolute`: If a child element has `absolute` then the parent element will xem như child ko có ở đó luôn. Để children absolutely position theo parent thì parent phải có position là `relative` hoặc `absolute`.
 - `relative`: Ở chỗ cũ như `static`, nhưng khác với `static` là bây giờ `left/right/top/bottom/z-index` sẽ hoạt động.
 
 ### ETC
