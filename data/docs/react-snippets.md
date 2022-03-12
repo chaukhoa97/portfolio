@@ -4,29 +4,21 @@ category: 'React'
 draft: false
 ---
 
-- **Pass callback vào `onClick`**
+- **`useState` update dựa theo previous state; Lazy init - `expenseviveFn` chỉ chạy ở lần render đầu tiên để tạo ra giá trị init của state; Pass callback vào `onClick`**
+
   ```jsx
-  let a = <button onClick={() => dispatch('+')}>+</button>;
+  const expensiveFn = () => 100;
+  // Hoặc useState(() => expensiveFn()); KHÔNG PHẢI useState(expenseiveFn())
+  const [count, setCount] = useState(expensiveFn);
+  <button onClick={() => setCount(0)}>Reset</button> // Normal
+  <button onClick={() => setCount((prev) => prev + 1)}>{count}</button>; // Theo prev state
   ```
+
 - **Module CSS**
+
   ```jsx
   import styles from '../nav.module.scss';
   <h1 className={`${styles['active-nav']} ${styles.red}`}>Hello</h1>;
-  ```
-- **`useState` dựa theo previous state**
-  ```jsx
-  const [count, setCount] = useState(0);
-  <button onClick={() => setCount(count + 1)}>{count}</button>;
-  ```
-- **Lazy init**: `expenseviveFn` chỉ chạy ở lần render đầu tiên để tạo ra giá trị init của state
-
-  ```jsx
-  const expensiveFn = () => {
-    console.log(100);
-    return 100;
-  };
-  // Hoặc useState(() => expensiveFn()); KHÔNG PHẢI useState(expenseiveFn())
-  const [lazy, setLazy] = useState(expensiveFn);
   ```
 
 - **Portal**:

@@ -4,7 +4,11 @@ category: 'JavaScript'
 draft: false
 ---
 
-**Axios vs Fetch**: Fetch phải tốn thêm 1 promise (`.json()`), ngoài ra trong các lệnh như POST,PATCH,... phải convert data bằng JSON.stringify. Axios có thể trực tiếp handle error bằng `catch` còn Fetch thì phải check `response.ok`
+### 1xx -> 5xx response: Information, Succeed, Redirection, Client Err, Server Err
+
+### Axios vs Fetch
+
+Fetch phải tốn thêm 1 promise (`.json()`), ngoài ra trong các lệnh như POST,PATCH,... phải convert data bằng JSON.stringify. Axios có thể trực tiếp handle error bằng `catch` còn Fetch thì phải check `response.ok`
 
 ```jsx
 //1 GET

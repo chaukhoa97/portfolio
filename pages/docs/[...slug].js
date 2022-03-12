@@ -138,8 +138,9 @@ export default function Doc({
       )}
       <hr className="border-gray-200 dark:border-gray-700" />
       <div className="relative lg:flex">
+        {/* lg:max-h-[calc(100vh-146.65px)] */}
         {(showNav || windowWidth >= 1024) && (
-          <div className="top-20 z-10 w-full bg-transparent pt-6 lg:sticky lg:max-h-[calc(100vh-146.65px)] lg:w-max lg:min-w-[16rem] lg:overflow-y-scroll lg:pr-4 lg:pt-8">
+          <div className="top-0 z-10 w-full bg-transparent pt-6 lg:sticky lg:max-h-screen lg:w-max lg:min-w-[16rem] lg:overflow-y-scroll lg:pr-4 lg:pt-8">
             {docNav}
           </div>
         )}

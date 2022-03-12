@@ -6,7 +6,7 @@ draft: false
 
 1. Component lấy data từ Store (Store State) để thể hiện trên UI (View).
 2. Người dùng tương tác lên UI (Ex: onClick button ….).
-3. Component gọi hàm dispatch với tham số là một Action object dc tạo từ 1 trong 2 cách (**Component ở đây đồng thời là Action Creator**):
+3. Component tạo ra một Action obj (Action Creator) bằng 1 trong 2 cách và gọi hàm dispatch với tham số là Action object vừa tạo.
 
    - Tự declare 1 action object (slice2 line 31)
    - Thunk: 1 async fn that returns the action object (slice2 line 16)
