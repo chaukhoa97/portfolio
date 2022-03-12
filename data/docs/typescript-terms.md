@@ -4,6 +4,8 @@ category: 'Typescript'
 draft: false
 ---
 
+Dùng Static Types -> Có thể notice các lỗi khi dev.
+
 ```ts
 as ... : ... Assertion
 &: Intersection

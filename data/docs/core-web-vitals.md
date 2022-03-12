@@ -22,7 +22,7 @@ CLS occurs when elements have been shifted after initially being rendered by the
 -> CLS measure your site’s **overall layout stability**
 ![](https://nextjs.org/static/images/learn/seo/cls-example.png)
 
-### [Lighthouse Weights for Vitals](https://web.dev/performance-scoring/#lighthouse-8) - How to improve
+### How to improve [Lighthouse Core web vitals](https://web.dev/performance-scoring/#lighthouse-8)
 
 #### [next/image](https://nextjs.org/docs/basic-features/image-optimization)
 

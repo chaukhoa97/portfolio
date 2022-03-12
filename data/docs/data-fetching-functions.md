@@ -14,26 +14,29 @@ export const getStaticPaths = async () => {
   return { paths, fallback: false };
 };
 
-// `context` là object có nhiều property (đọc docs), trong đó quan trọng nhất là `params` - chính là Route Parameters for pages using dynamic routes.
+// `context` là object có nhiều property (đọc docs), trong đó quan trọng nhất là
+// `params` - chính là Route Parameters for pages using dynamic routes.
 // [pageId].jsx -> context = { params: { pageId: ... }, locales... }
 export const getStaticProps = async (context) => {
   const {
     params: { pageId }, //! Nested Destructuring
   } = context;
+  const title = `Bài viết số ${pageId}`;
+
   // Fetch or do something..., `paths` dùng để render các Link trong navBar
   const paths = [{ params: { pageId: 't1' } }, { params: { pageId: 't2' } }];
+
   return {
     props: {
       // `pageId`, `title`, `paths` will be passed to the Page component as props
       pageId,
-      title: 'fetchFromServer(pageId)',
+      title,
       paths,
     },
   };
 };
 
 export default function Page({ pageId, title, paths }) {
-  console.log(paths);
   return (
     <div className="flex">
       <div className="w-1/4">

@@ -4,9 +4,9 @@ category: 'JavaScript'
 draft: false
 ---
 
-### Advanced
+#### Callback: _Hàm_ dc truyền qua _argument_
 
-#### Callback: _Hàm_ dc truyền qua _argument_: Gọi hàm khi có sự kiện xảy ra, thực hiện bất đồng bộ.
+Gọi hàm khi có sự kiện xảy ra, thực hiện bất đồng bộ.
 
 #### Event loop
 

@@ -55,28 +55,24 @@ const titleRef = useRef();
 
 ### Custom Hook
 
-Được dùng cho những fn có Hook (Hook chỉ dc ở trong Function component/Custom hook) khi cần reuse nhiều chỗ, hoặc cho những component có logic na ná nhau (như một fn bình thường nhưng giờ có thêm Hook)
+Handle business logic ở CustomHook rồi truyền vào UI(dumb) Component
 
-```jsx:useCounter.jsx
+```jsx:useCounterUseCase.jsx
 // Custom hook must start with "use"
-function useCounter(isForward = true) {
-  const [num, setNum] = useState(0);
-  useEffect(() => {
-    if (isForward) {
-      setInterval(() => setNum((n) => n + 1), 3000);
-    } else {
-      setInterval(() => setNum((n) => n - 1), 3000);
-    }
-  }, [isForward]);
-  return num;
+function useCounterUseCase(isForward = true) {
+  const [state, setState] = useState({
+    count: 0,
+    isForward: true,
+  });
+  return state;
 }
 ```
 
-```jsx:HookUser.jsx
-import useCounter from './useCounter.jsx';
-function Forward() {
-  const result = useCounter(false);
-  return <h3>{result}</h3>;
+```jsx:Container.jsx
+import useCounterUseCase from './useCounterUseCase.jsx';
+function Container() {
+  const {count, isForward} = useCounterUseCase(false);
+  return isForward ? <div>{count + 1}</div> : <div>{count - 1}</div>;
 }
 ```
 
