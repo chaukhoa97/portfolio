@@ -12,6 +12,7 @@ import Link from 'next/link';
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { ChevronRightIcon, ChevronDownIcon } from '@heroicons/react/outline';
+import { PageSEO } from '@/components/SEO';
 
 const DEFAULT_LAYOUT = 'DocLayout';
 
@@ -78,7 +79,8 @@ export default function Doc({
   next,
   allDocCategories,
 }) {
-  const { mdxSource, toc, frontMatter } = post;
+  const { mdxSource, toc, frontMatter, title } = post;
+  console.log(post);
   const docCategories = Object.keys(allDocCategories);
 
   docCategoriesOrder.forEach((category) => {
@@ -123,6 +125,7 @@ export default function Doc({
 
   return (
     <>
+      <PageSEO title={title} />
       {windowWidth < 1024 && (
         <div
           onClick={handleShowNav}
@@ -138,7 +141,6 @@ export default function Doc({
       )}
       <hr className="border-gray-200 dark:border-gray-700" />
       <div className="relative lg:flex">
-        {/* lg:max-h-[calc(100vh-146.65px)] */}
         {(showNav || windowWidth >= 1024) && (
           <div className="top-0 z-10 w-full bg-transparent pt-6 lg:sticky lg:max-h-screen lg:w-max lg:min-w-[16rem] lg:overflow-y-scroll lg:pr-4 lg:pt-8">
             {docNav}
