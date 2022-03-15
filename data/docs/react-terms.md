@@ -18,6 +18,16 @@ draft: false
 
 3. **Props**: The object passed to the function component, included children. Props are like arguments you pass to a function. **They let a parent component pass data to a child component and customize its appearance**. For example, a Form can pass a color prop to a Button.
 
+   ```tsx
+   // Declaring type of props
+   type AppProps = {
+     message: string;
+   }; /* use `interface` if exporting so that consumers can extend */
+   const App = ({ message = 'default mess' }: AppProps): JSX.Element => (
+     <div>{message}</div>
+   );
+   ```
+
 4. **State**: State is like a component’s memory. **It lets a component keep track of some information and change it in response to interactions**. For example, a Button might keep track of isHovered state.
 
 ```jsx

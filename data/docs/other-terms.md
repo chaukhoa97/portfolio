@@ -19,7 +19,7 @@ Babel is a JS transcompiler that is mainly used to convert ECMAScript 2015+ code
 
 ### npm, npx, yarn
 
-- package.json: **~**1.2.3 < 1.3.0 || **^**1.2.3 < 2.0.0
+- package.json: ~1.2.3 < 1.3.0 || ^1.2.3 < 2.0.0
 - `npm i` / `npm i -g`: Project Dependencies / Global Dependencies.
 - `npm i --save-dev`: Development Only -> Không có trong Production.
 - `npx`: Chỉ execute chứ ko cài -> Dùng cho các lib chỉ chạy 1 lần trong vòng đời dự án như `create-react-app`.

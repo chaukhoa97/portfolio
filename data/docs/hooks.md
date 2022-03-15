@@ -7,28 +7,28 @@ draft: false
 ### Optimize
 
 - `useCallback(fn, deps)` = `useMemo(() => fn, deps)`
-- `React.memo(component)`: Chỉ re-render component dc wrap bởi `React.memo` khi props của component thay đổi.
+- `React.memo(component)`: Chỉ re-render component dc wrap bởi `React.memo` khi props của component thay đổi -> Khi wrap `React.memo` ở các high level component -> các component ở dưới cũng sẽ ko bị re-render.
 - `useCallback`: Khi Component re-evaluate, function trong useCallback sẽ ko re-create lại.
-- `useMemo` (**ÍT DÙNG HƠN** `useCallback`): Chỉ dùng khi function này quá phức tạp (ex: Sort, fetch,...) mà value có dependency mới thay đổi.
-
-```jsx:GrandParent.jsx
-const GrandParent = () => {
-  //1. GrandParent re-render, storedFn do có useCallback ko bị create lại.
-  const storedFn = useCallback(() => 'Some value', []);
-  //2. prop của Parent là storedFn ko bị create lại...
-  return <Parent expensiveFn={storedFn} />;
-};
-export default GrandParent;
-```
+- `useMemo` (**ÍT DÙNG HƠN** `useCallback`): Chỉ dùng khi function tạo ra value quá phức tạp (ex: Sort, fetch,...) mà value chỉ có dependency mới thay đổi.
 
 ```jsx:Parent.jsx
-const Parent = ({ expensiveFn }) => {
-  const unstoredValue = expensiveFn(); // Create lại mỗi lần Parent re-render
-  const storedValue = useMemo(() => expensiveFn, []); // Create lại theo Dependency
-  return <Child a={unStoredValue} />; // Nếu unstoredValue thay đổi/là ref value, thì Child sẽ re-render
+const Parent = () => {
+  //1. Parent re-render, cachedFn do có useCallback ko bị create lại.
+  const cachedFn = useCallback(() => 'Some value', []);
+  //2. prop của Children là cachedFn ko bị create lại...
+  return <Children expensiveFn={cachedFn} />;
 };
-//3. prop ko đổi + React.memo -> Parent sẽ ko re-render khi GrandParent re-render
-export default React.memo(Parent);
+export default Parent;
+```
+
+```jsx:Children.jsx
+const Children = ({ expensiveFn }) => {
+  const uncachedValue = expensiveFn(); // Create lại mỗi lần Children re-render
+  const cachedValue = useMemo(() => expensiveFn, []); // Create lại theo Dependency
+  return <Kid a={uncachedValue} />; // Khi uncachedValue thay đổi/là ref value, thì Kid sẽ re-render
+};
+//3. prop ko đổi + React.memo -> Children sẽ ko re-render khi Parent re-render
+export default React.memo(Children);
 ```
 
 ### useRef vs useState vs let-const
