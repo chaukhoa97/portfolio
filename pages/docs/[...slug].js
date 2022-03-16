@@ -12,7 +12,6 @@ import Link from 'next/link';
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { ChevronRightIcon, ChevronDownIcon } from '@heroicons/react/outline';
-import { PageSEO } from '@/components/SEO';
 
 const DEFAULT_LAYOUT = 'DocLayout';
 
@@ -101,31 +100,8 @@ export default function Doc({
     }
   };
 
-  const docNav = docCategories.map((category) => (
-    <div key={category} className="mb-8">
-      <h2 className="mb-2 text-lg font-semibold">
-        {category !== 'undefined' ? category : 'ETC'}
-      </h2>
-      <ul className="space-y-2 border-l border-gray-300 dark:border-gray-600">
-        {allDocCategories[category].map((doc) => (
-          <li key={doc.slug}>
-            <Link href={`/docs/${doc.slug}`}>
-              <a
-                className="-ml-px border-l border-transparent pl-4 text-gray-500 hover:border-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:border-gray-300 dark:hover:text-gray-300"
-                onClick={handleShowNav}
-              >
-                {doc.title}
-              </a>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  ));
-
   return (
     <>
-      <PageSEO title={title} />
       {windowWidth < 1024 && (
         <div
           onClick={handleShowNav}
@@ -143,7 +119,27 @@ export default function Doc({
       <div className="relative lg:flex">
         {(showNav || windowWidth >= 1024) && (
           <div className="top-0 z-10 w-full bg-transparent pt-6 lg:sticky lg:max-h-screen lg:w-max lg:min-w-[16rem] lg:overflow-y-scroll lg:pr-4 lg:pt-8">
-            {docNav}
+            {docCategories.map((category) => (
+              <div key={category} className="mb-8">
+                <h2 className="mb-2 text-lg font-semibold">
+                  {category !== 'undefined' ? category : 'ETC'}
+                </h2>
+                <ul className="space-y-2 border-l border-gray-300 dark:border-gray-600">
+                  {allDocCategories[category].map((doc) => (
+                    <li key={doc.slug}>
+                      <Link href={`/docs/${doc.slug}`}>
+                        <a
+                          className="-ml-px border-l border-transparent pl-4 text-gray-500 hover:border-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:border-gray-300 dark:hover:text-gray-300"
+                          onClick={handleShowNav}
+                        >
+                          {doc.title}
+                        </a>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         )}
         {frontMatter.draft !== true ? (

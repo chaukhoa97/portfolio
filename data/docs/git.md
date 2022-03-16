@@ -43,6 +43,11 @@ draft: false
 - `git status (<file-name>)`: Xem trạng thái (local, staging hay đã commit) cả nhánh (hoặc file-name).
 - `reset` vs `revert`: `reset` chỉ revert về commit cũ, `revert` thì tạo thêm 1 commit những thay đổi của lần revert đó.
 
+### Config
+
+- `git config --list --show-origin`
+- `git config --global user.email jonhkane00@gmail.com`
+
 ### Remote
 
 - `git remote`: Show những remote repo mà local repo này liên kết, mặc định của Github là **origin**
@@ -56,8 +61,6 @@ draft: false
 - `git stash list` - `git stash clear` - `git drop stash@{1}`
 
 ### ETC
-
-- **Reset lại user VS Code**: `git config --global user.email jonhkane00@gmail.com`
 
 - `git cherry-pick <commit-id>`: Nhánh **feature** có commit _F1_ và _F2_. Ở nhánh **master**:
 
