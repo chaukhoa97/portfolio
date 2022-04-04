@@ -3,64 +3,64 @@ title: 'Git'
 draft: false
 ---
 
-### Terms
+#### Terms
 
 - **HEAD**: Khi làm việc với Git, chỉ một branch có thể check out tại một thời điểm - và đây được gọi là nhánh **HEAD**. Thông thường, đây còn được gọi là nhánh _active_ hoặc _current_.
 - **Detached HEAD**: When a specific commit is checked out instead of a branch.
 
-### Basic commands
+#### Basic commands
 
 - `git push origin f1`: Push **local t1** lên **remote t1**
 - `git push t1:t2`: Push **local t1** sang **local t2** (ko cần chuyển nhánh để push)
 
-### Merge vs Rebase: Both integrate changes from one branch into another branch
+#### Merge vs Rebase: Both integrate changes from one branch into another branch
 
-- `git checkout feature` + `git merge main` = `git merge feature main`:
-  - Nếu hủy: `git merge --abort`
+- `git checkout feature` + `git merge main`
+  - **Nếu hủy**: `git merge --abort`
   - **Fix conflict** -> add. -> `git merge --continue` -> Sửa message ở màn hình _interactive_ -> :wq
 - `git rebase` syntax giống hệt: Chỉ nên sử dụng trên nhánh **feature**, không nên dùng ở nhánh **master**
 
-### Status
+#### Status
 
 - `git reflog show master` (Xem nhật ký thao tác trên nhánh master) → `git reset 'HEAD@{1}’` (với HEAD@{0} là thao tác vừa làm → reset về thao tác trước đó là HEAD@{1}).
 - `HEAD@{1}` vs `HEAD~1`: 2nd của `git reflog` vs 2 commits older than HEAD của `git log --oneline`.
 
-### Squash 3 commit
+#### Squash 3 commit
 
 - **Chưa push**: `git rebase -i HEAD~3` -{'>'} Từ hàng 2 trở xuống, đổi từ pick thành s -{'>'} Conflict -{'>'} ...
 - **Đã push**: `git reset HEAD~3` / (3rd trong `git log`) -{'>'} add, commit -{'>'} `git push -f origin <branch-name>`
 
-### Branch
+#### Branch
 
 - `git branch -b newBranch`: Tạo và chuyển sang nhánh _newBranch_
-- `git branch -D test1`: Xóa nhánh test1
+- `git branch -d test1`: Xóa nhánh test1
 - `git branch -m newName`: Đổi tên nhánh đang checkout thành newName
 - `git branch -a`: Show cả các branch ở remote
 
-### Reset
+#### Reset
 
 - `git reset --(soft / mixed / hard) (HEAD~1 / <commit-id>)` -> Về stage/local/xóa luôn.
 - `git status (<file-name>)`: Xem trạng thái (local, staging hay đã commit) cả nhánh (hoặc file-name).
 - `reset` vs `revert`: `reset` chỉ revert về commit cũ, `revert` thì tạo thêm 1 commit những thay đổi của lần revert đó.
 
-### Config
+#### Config
 
 - `git config --list --show-origin`
 - `git config --global user.email jonhkane00@gmail.com`
 
-### Remote
+#### Remote
 
 - `git remote`: Show những remote repo mà local repo này liên kết, mặc định của Github là **origin**
 - `git fetch origin`: Cập nhật data từ remote **origin**
 - `git merge origin/master`: Merge nhánh **master** của remote **origin** vào local HEAD
 
-### Stash
+#### Stash
 
 - `git stash` / `git stash save 'message'`
 - `git stash apply ‘stash@{1}’` vs `git stash pop`: Apply nhưng ko xóa / xóa luôn stash.
 - `git stash list` - `git stash clear` - `git drop stash@{1}`
 
-### ETC
+#### ETC
 
 - `git cherry-pick <commit-id>`: Nhánh **feature** có commit _F1_ và _F2_. Ở nhánh **master**:
 
@@ -71,4 +71,4 @@ draft: false
 
 - **Vim**: `ESC W Q` → Save & Quit.
 
-- **Thử version cũ hơn của pj**: `git checkout -b test-branch 56a4e5c08 --bro.js` - Tạo nhánh mới từ {'<'}commit-id 56a4e5c08{'>'} -{'>'} do anything... -{'>'} `git checkout master` -{'>'} `git branch -d test-branch`
+- **Thử version cũ hơn của pj (Detached HEAD)**: `git checkout -b test-branch 56a4e5c08 --index.js` - Tạo nhánh mới từ {'<'}commit-id 56a4e5c08{'>'} -{'>'} do anything... -{'>'} `git checkout master` + `git branch -d test-branch`
