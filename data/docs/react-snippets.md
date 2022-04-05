@@ -21,6 +21,21 @@ draft: false
   <h1 className={`${styles['active-nav']} ${styles.red}`}>Hello</h1>;
   ```
 
+- **Nested components**
+
+  ```jsx
+  // Tách riêng Child ra vì Child ở trong Parent bị re-define khi Parent re-render
+  const Child = ({onClick}) => {
+    return <button onClick={onClick}>+</button>;
+  }
+
+  const Parent = () => {
+    const [count, setCount] = useState(0);
+    const handleClick = () => setCount(count + 1);
+    return <Child onClick={handleClick} />;
+  }
+  ```
+
 - **Portal**:
 
   ```jsx
