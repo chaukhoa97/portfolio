@@ -12,6 +12,7 @@ draft: false
 
 - `git push origin f1`: Push **local t1** lên **remote t1**
 - `git push t1:t2`: Push **local t1** sang **local t2** (ko cần chuyển nhánh để push)
+- `git pull origin main`: Pull **origin main** về **local main**, BẤT KỂ ĐANG Ở NHÁNH NÀO.
 
 #### Merge vs Rebase: Both integrate changes from one branch into another branch
 
@@ -50,7 +51,7 @@ draft: false
 
 #### Remote
 
-- `git remote`: Show những remote repo mà local repo này liên kết, mặc định của Github là **origin**
+- `git remote -v`: Show những remote repo mà local repo này liên kết, mặc định của Github là **origin**
 - `git fetch origin`: Cập nhật data từ remote **origin**
 - `git merge origin/master`: Merge nhánh **master** của remote **origin** vào local HEAD
 

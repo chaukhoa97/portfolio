@@ -4,7 +4,13 @@ category: 'CSS'
 draft: false
 ---
 
-- ** Center hoàn toàn **
+- **Flex items to hơn so với dự kiến**
+
+  - A flex item cannot be smaller than the size of its content along the main axis.
+  - Mặc định các flex item sẽ có `min-width/min-height: auto` -> Sửa thành `0` hoặc `overflow: hidden`.  
+    Nên sửa ở high level component vì `auto` ở parent có thể override `0` ở children.
+
+- **Center hoàn toàn**
 
   ```scss
   .item {
@@ -14,6 +20,16 @@ draft: false
     transform: translate(-50%, -50%);
   }
   ```
+
+- **Pause browser for debug**
+
+  ```js
+  setTimeout(function () {
+    debugger;
+  }, 3000); // Gõ in console tab
+  ```
+
+  Hover rồi đợi 3s -> debug
 
 - **Ant Design**: Grid gutter gây overflow
 
@@ -71,7 +87,7 @@ draft: false
   }
   ```
 
-- Hover cho after/before: pseudo class đứng trước pseudo element
+- Hover cho `after/before`: pseudo class đứng trước pseudo element
 
   ```scss
   .alo:hover::before {
