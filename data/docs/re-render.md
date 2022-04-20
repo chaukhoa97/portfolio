@@ -4,12 +4,11 @@ category: 'React'
 draft: false
 ---
 
-### <center>**Re-evaluating Components <span style={{color:'#E53E3E'}}>!==</span> Re-evaluating DOM**</center>
+### React re-render component khi:
 
-![](https://i.imgur.com/ykPsS7g_d.webp?maxwidth=1520&fidelity=grand)
-
-- Mỗi khi state, props, hoặc context (nếu quy về vẫn là **state**) thay đổi → React re-render component functions.
-- Parent component re-render → Tất cả các Child component re-render theo (trừ **React.memo**).
+- State (including updates from custom hooks your component consumes) change.
+- Any [Props / ContextValue consumed by your component] changes.
+- Parent của component re-render (trừ `React.memo`).
 
 ### Key in Array of Items: Để React biết dc item nào dc thêm/sửa/xóa để ko re-render thừa thãi.
 

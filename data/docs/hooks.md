@@ -9,7 +9,7 @@ draft: false
 - `useCallback(fn, deps)` = `useMemo(() => fn, deps)`
 - `React.memo(component)`: Chỉ re-render component dc wrap bởi `React.memo` khi props của component thay đổi -> Khi wrap `React.memo` ở các high level component -> các component ở dưới cũng sẽ ko bị re-render.
 - `useCallback`: Khi Component re-evaluate, function trong useCallback sẽ ko re-create lại.
-- `useMemo` (**ÍT DÙNG HƠN** `useCallback`): Chỉ dùng khi function tạo ra value quá phức tạp (ex: Sort, fetch,...) mà value chỉ có dependency mới thay đổi.
+- `useMemo`: Dùng để chỉ re-render Component khi dependency thay đổi (giống `React.memo`) / Function tạo value quá phức tạp (ex: Sort, fetch,...).
 
 ```jsx:Parent.jsx
 const Parent = () => {
@@ -23,9 +23,18 @@ export default Parent;
 
 ```jsx:Children.jsx
 const Children = ({ expensiveFn }) => {
-  const uncachedValue = expensiveFn(); // Create lại mỗi lần Children re-render
-  const cachedValue = useMemo(() => expensiveFn, []); // Create lại theo Dependency
-  return <Kid a={uncachedValue} />; // Khi uncachedValue thay đổi/là ref value, thì Kid sẽ re-render
+  // Create lại mỗi lần Children re-render
+  const uncachedValue = expensiveFn(); 
+  // Create lại theo Dependency
+  const cachedValue = useMemo(() => expensiveFn, []); 
+  const createMemoizedComponent = useMemo(() => <Child memoizedValue={cachedValue} />, [cachedValue]);
+
+  return (
+    <>
+      <Kid a={uncachedValue} />; // Khi uncachedValue thay đổi/là ref value, thì Kid sẽ re-render
+      {createMemoizedComponent}
+    </>
+  )
 };
 //3. prop ko đổi + React.memo -> Children sẽ ko re-render khi Parent re-render
 export default React.memo(Children);

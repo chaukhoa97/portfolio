@@ -14,22 +14,51 @@ draft: false
 
   ```scss
   .item {
+    // Ở đây thì mới chỉ là topleft corner của item nằm ở center của container
+    // -> cần transform theo item size để hoàn toàn center item theo container
     top: 50%;
     left: 50%;
-    // Ở đây thì mới chỉ là topleft corner của item nằm ở center của container -> cần transform theo item size để hoàn toàn center item theo container
     transform: translate(-50%, -50%);
+    position: relative;
   }
   ```
 
-- **Pause browser for debug**
+- **Image scale with Container width**
 
-  ```js
-  setTimeout(function () {
-    debugger;
-  }, 3000); // Gõ in console tab
+  ```css
+  .img-fluid {
+    width: 100%;
+    height: auto;
+  }
   ```
 
-  Hover rồi đợi 3s -> debug
+- **Browser debug**
+
+  ```js
+  // Gõ in console tab -> Hover rồi đợi 3s -> Browser pause -> debug
+  setTimeout(function () {
+    debugger;
+  }, 3000);
+  ```
+
+  ```css
+  <!-- Thấy dc thằng nào overflow -- > * {
+    outline: 1px solid #f00 !important;
+  }
+  ```
+
+- **Swiper bug**
+
+  ```css
+  .promotions {
+    display: flex; <!-- Gây bug width vô hạn -->
+  }
+
+  .promotion {
+    max-width: 100% <!-- Bug fix -->
+    flex: 1 1 100%;
+  }
+  ```
 
 - **Ant Design**: Grid gutter gây overflow
 
@@ -48,22 +77,22 @@ draft: false
 
 - **react-slick** Carousel bị duplicate
 
-```scss
-// Cách 1
-.slick-slide > div {
-  margin: 0 10px;
-}
-.slick-list {
-  margin: 0 -10px;
-}
-// Cách 2
-.slick-slide {
-  margin: 0 10px;
-}
-.slick-list {
-  margin: 0 -10px;
-}
-```
+  ```scss
+  // Cách 1
+  .slick-slide > div {
+    margin: 0 10px;
+  }
+  .slick-list {
+    margin: 0 -10px;
+  }
+  // Cách 2
+  .slick-slide {
+    margin: 0 10px;
+  }
+  .slick-list {
+    margin: 0 -10px;
+  }
+  ```
 
 - Hidden & Visible element
 

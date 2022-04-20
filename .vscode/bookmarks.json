@@ -1,14 +1,14 @@
 {
-  "files": [
-    {
-      "path": "components/Pagination.js",
-      "bookmarks": [
-        {
-          "line": 21,
-          "column": 80,
-          "label": "font"
-        }
-      ]
-    }
-  ]
+	"files": [
+		{
+			"path": "components/Pagination.js",
+			"bookmarks": [
+				{
+					"line": 21,
+					"column": 80,
+					"label": "font"
+				}
+			]
+		}
+	]
 }
