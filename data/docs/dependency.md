@@ -1,5 +1,5 @@
 ---
-title: 'Terminal'
+title: 'Dependency'
 draft: false
 ---
 
