@@ -42,7 +42,7 @@ draft: false
 
 - `git reset --(soft / mixed / hard) (HEAD~1 / <commit-id>)` -> Về stage/local/xóa luôn.
 - `git status (<file-name>)`: Xem trạng thái (local, staging hay đã commit) cả nhánh (hoặc file-name).
-- `reset` vs `revert`: `reset` chỉ revert về commit cũ, `revert` thì tạo thêm 1 commit những thay đổi của lần revert đó.
+- `reset` vs `revert`: `revert` chỉ undo riêng 1 commit `X`, còn `reset` back về luôn commit đó luôn (undo hết ~ commit sau `X`).
 
 #### Config
 
