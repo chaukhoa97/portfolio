@@ -1,9 +1,13 @@
 import Link from '@/components/Link';
 import PageTitle from '@/components/PageTitle';
-import ScrollTopAndComment from '@/components/ScrollTopAndComment';
+import SectionContainer from '@/components/SectionContainer';
 import { BlogSEO } from '@/components/SEO';
+import Image from '@/components/Image';
+import Tag from '@/components/Tag';
 import siteMetadata from '@/data/siteMetadata';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline';
+import Comments from '@/components/comments';
+import ScrollTopAndComment from '@/components/ScrollTopAndComment';
+import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/outline';
 
 const editUrl = (fileName) =>
   `${siteMetadata.siteRepo}/blob/master/data/docs/${fileName}`;
