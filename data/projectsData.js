@@ -1,12 +1,12 @@
 const projectsData = [
   {
-    title: 'E-commerce Website',
-    description: `One person project in 2 weeks, built-from-scratch e-commerce website with a compact design.
-    - UI: React & Ant Design, with a little SCSS.
+    title: 'Onways',
+    description: `Full-featured e-commerce site comes with an admin dashboard.
+    - UI: React, Ant Design and SCSS.
     - State management: Redux with Redux Toolkit.
     - Database: Firebase's Realtime Database.
     - Authentication: Firebase Authentication.
-This is the last project I have done when I'm in the Sun*'s internship program. It's overall usable but not so mobile-friendly due to time restrictions.`,
+This is a one-person project I have done in 2 weeks when participating in the Sun Asterisk internship program.`,
     emphasize: `Even though you can register an account for yourself, log in with this account to use the admin panel.
       - ID: admin@admin.com
       - Password: 123456

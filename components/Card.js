@@ -41,7 +41,7 @@ const Card = ({ title, description, imgSrc, href, emphasize }) => (
         <p className="prose mb-3 max-w-none whitespace-pre-wrap text-gray-500 dark:text-gray-400">
           {description}
         </p>
-        <p className="prose mb-3 max-w-none whitespace-pre-wrap text-lg font-bold text-gray-500 dark:text-gray-400">
+        <p className="prose max-w-none whitespace-pre-wrap text-lg font-bold text-gray-500 dark:text-gray-400">
           {emphasize}
         </p>
         {href && (
