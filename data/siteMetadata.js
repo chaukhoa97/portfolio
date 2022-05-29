@@ -15,7 +15,7 @@ const siteMetadata = {
   // twitter: 'https://twitter.com/Twitter',
   facebook: "https://www.facebook.com/finnchau1",
   // youtube: 'https://youtube.com',
-  // linkedin: 'https://www.linkedin.com',
+  linkedin: 'https://www.linkedin.com/in/khoa-ch%C3%A2u-4701b5233/',
   locale: "en-US",
   analytics: {
     // supports plausible, simpleAnalytics, umami or googleAnalytics
