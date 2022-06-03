@@ -14,6 +14,17 @@ draft: false
   <button onClick={() => setCount((prev) => prev + 1)}>{count}</button>; // Theo prev state
   ```
 
+- **Show obj ra page**
+
+  ```jsx
+  Object.entries(product).map(([key, val]) => (
+    <Fragment key={key}>
+      <h2 style={{ color: 'red' }}>{key}</h2>
+      <p>{JSON.stringify(val, null, 2)}</p>
+    </Fragment>
+  ));
+  ```
+
 - **Module CSS**
 
   ```jsx
@@ -25,15 +36,15 @@ draft: false
 
   ```jsx
   // Tách riêng Child ra vì Child ở trong Parent bị re-define khi Parent re-render
-  const Child = ({onClick}) => {
+  const Child = ({ onClick }) => {
     return <button onClick={onClick}>+</button>;
-  }
+  };
 
   const Parent = () => {
     const [count, setCount] = useState(0);
     const handleClick = () => setCount(count + 1);
     return <Child onClick={handleClick} />;
-  }
+  };
   ```
 
 - **Portal**:
