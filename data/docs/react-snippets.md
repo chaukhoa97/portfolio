@@ -19,8 +19,8 @@ draft: false
   ```jsx
   Object.entries(product).map(([key, val]) => (
     <Fragment key={key}>
-      <h2 style={{ color: 'red' }}>{key}</h2>
-      <p>{JSON.stringify(val, null, 2)}</p>
+      <p style={{ color: 'red' }}>{key}</p>
+      <pre>{JSON.stringify(val, null, 2)}</pre>
     </Fragment>
   ));
   ```
