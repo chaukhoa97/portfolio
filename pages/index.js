@@ -1,9 +1,9 @@
-import { PageSEO } from '@/components/SEO';
-import siteMetadata from '@/data/siteMetadata';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Disclosure, Transition } from '@headlessui/react';
-import { ChevronUpIcon } from '@heroicons/react/outline';
+import { PageSEO } from '@/components/SEO'
+import siteMetadata from '@/data/siteMetadata'
+import Image from 'next/image'
+import Link from 'next/link'
+import { Disclosure, Transition } from '@headlessui/react'
+import { ChevronUpIcon } from '@heroicons/react/outline'
 
 export default function Home() {
   return (
@@ -38,7 +38,7 @@ export default function Home() {
         </Link>
       </div>
       <div
-        className="min- mx-auto flex flex-col md:flex-row md:space-x-10 md:pt-8 lg:space-x-20"
+        className="mx-auto flex flex-col md:flex-row md:space-x-10 md:pt-8 lg:space-x-20"
         id="about-me"
       >
         <div className="relative mt-4 mb-8 h-96 w-full flex-auto md:mb-0 md:mt-0 md:h-auto">
@@ -189,5 +189,5 @@ export default function Home() {
         </Disclosure>
       </div>
     </div>
-  );
+  )
 }
